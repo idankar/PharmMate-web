@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PharmMate - Compare Pharmacy Prices in Israel</title>
+    <meta name="description" content="PharmMate helps you find the best prices at Super-Pharm, Be Pharm, and Good Pharm.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#EFA7B0', // Rosy Pink from your "Start Saving" button
+                        secondary: '#9CD3B9', // Soft Mint from your category icons
+                        dark: '#2D3748',
+                        softbg: '#FFF5F7', // Very light pink background
+                    },
+                    fontFamily: {
+                        sans: ['Nunito', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts (Nunito for a softer, app-like feel) -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Nunito', sans-serif; }
+        
+        /* Custom Gradient Background */
+        .app-gradient {
+            background: linear-gradient(180deg, #FFF0F3 0%, #FFFFFF 100%);
+        }
+
+        .iphone-mockup {
+            border: 12px solid #2d3748;
+            border-radius: 3rem;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(239, 167, 176, 0.4); /* Pinkish shadow */
+        }
+        .iphone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 35%;
+            height: 28px;
+            background: #2d3748;
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 16px;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="app-gradient text-gray-700 min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="bg-transparent pt-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <!-- Logo Icon -->
+                    <div class="h-10 w-10 bg-white rounded-full flex items-center justify-center shadow-sm text-primary">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <span class="text-2xl font-extrabold text-dark tracking-tight">PharmMate</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#features" class="text-gray-600 hover:text-primary font-semibold transition">Features</a>
+                    <a href="#about" class="text-gray-600 hover:text-primary font-semibold transition">About</a>
+                    <a href="mailto:contact@pharmmate.app" class="bg-white text-primary px-5 py-2 rounded-full shadow-sm font-bold hover:shadow-md transition">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <div class="relative z-10 pb-8 sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
+                <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
+                    <div class="sm:text-center lg:text-left">
+                        <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+                            <span class="block text-dark">Smart Shopping for</span>
+                            <span class="block text-primary">Health & Beauty</span>
+                        </h1>
+                        <p class="mt-4 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                            Compare prices instantly across <strong>Super-Pharm</strong>, <strong>Be Pharm</strong>, and <strong>Good Pharm</strong>. Discover cleaner alternatives and better deals.
+                        </p>
+                        <div class="mt-8 sm:mt-10 sm:flex sm:justify-center lg:justify-start gap-4">
+                            <div class="rounded-full shadow-lg shadow-pink-200">
+                                <a href="#" class="w-full flex items-center justify-center px-8 py-4 border border-transparent text-base font-bold rounded-full text-white bg-primary hover:opacity-90 transition md:py-4 md:text-lg md:px-10">
+                                    <i class="fa-brands fa-apple mr-2"></i> iOS App
+                                </a>
+                            </div>
+                            <div class="mt-3 sm:mt-0">
+                                <a href="#" class="w-full flex items-center justify-center px-8 py-4 border border-transparent text-base font-bold rounded-full text-primary bg-white hover:bg-gray-50 transition md:py-4 md:text-lg md:px-10 shadow-sm">
+                                    <i class="fa-brands fa-android mr-2"></i> Android
+                                </a>
+                            </div>
+                        </div>
+                        <p class="mt-6 text-sm text-gray-400 font-medium">
+                            <span class="inline-block w-2 h-2 bg-green-400 rounded-full mr-2"></span>Coming soon to App Stores
+                        </p>
+                    </div>
+                </main>
+            </div>
+        </div>
+        
+        <!-- Hero Image / App Mockup -->
+        <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 flex items-center justify-center py-12">
+            <!-- Phone Frame -->
+            <div class="iphone-mockup bg-white h-[640px] w-[320px] relative z-20">
+                <div class="iphone-notch"></div>
+                
+                <!-- Screen Content -->
+                <div class="h-full w-full flex flex-col bg-gradient-to-b from-[#FFF0F3] to-white">
+                    
+                    <!-- App Header -->
+                    <div class="h-28 px-6 flex items-end pb-4 justify-between">
+                        <div class="h-10 w-10 bg-white rounded-full flex items-center justify-center shadow-sm text-primary">
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+                        <span class="text-2xl font-bold text-gray-800">PharmMate</span>
+                        <div class="h-10 w-10 bg-white rounded-full flex items-center justify-center shadow-sm text-blue-500">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                    </div>
+
+                    <!-- Savings Card -->
+                    <div class="px-6 mt-4">
+                        <div class="bg-white rounded-3xl p-6 shadow-sm border border-pink-50 flex flex-col items-center text-center">
+                            <span class="text-4xl font-extrabold text-primary">₪0</span>
+                            <span class="text-gray-400 text-sm mt-1">You haven't saved yet!</span>
+                            <button class="mt-4 bg-primary text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg shadow-pink-200 w-full">
+                                Start Saving Now!
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Categories Row -->
+                    <div class="px-6 mt-8">
+                        <h3 class="text-right font-bold text-gray-700 mb-4">Browse Categories</h3>
+                        <div class="flex justify-between gap-3">
+                            <!-- Cat 1 -->
+                            <div class="flex-1 bg-white p-3 rounded-2xl shadow-sm flex flex-col items-center gap-2 aspect-square justify-center">
+                                <i class="fa-solid fa-leaf text-secondary text-xl"></i>
+                                <span class="text-xs font-bold text-gray-500">Care</span>
+                            </div>
+                            <!-- Cat 2 -->
+                            <div class="flex-1 bg-white p-3 rounded-2xl shadow-sm flex flex-col items-center gap-2 aspect-square justify-center">
+                                <i class="fa-solid fa-user text-secondary text-xl"></i>
+                                <span class="text-xs font-bold text-gray-500">Cosmetics</span>
+                            </div>
+                            <!-- Cat 3 -->
+                            <div class="flex-1 bg-white p-3 rounded-2xl shadow-sm flex flex-col items-center gap-2 aspect-square justify-center">
+                                <i class="fa-solid fa-flask text-secondary text-xl"></i>
+                                <span class="text-xs font-bold text-gray-500">Meds</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Card -->
+                    <div class="px-6 mt-8">
+                        <h3 class="text-right font-bold text-gray-700 mb-4">Popular Products</h3>
+                        <div class="bg-white p-4 rounded-3xl shadow-sm flex flex-col">
+                            <div class="w-full h-32 bg-gray-100 rounded-2xl mb-3 flex items-center justify-center text-gray-300">
+                                <i class="fa-solid fa-image text-4xl"></i>
+                            </div>
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <p class="text-xs text-gray-400 font-bold uppercase">Estee Lauder</p>
+                                    <p class="font-bold text-gray-800 leading-tight mt-1">DayWear SPF 15</p>
+                                </div>
+                                <div class="bg-gray-50 p-2 rounded-xl">
+                                    <i class="fa-regular fa-heart text-primary"></i>
+                                </div>
+                            </div>
+                            <p class="text-secondary font-extrabold text-xl mt-2">From ₪217.31</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Decorative Blob -->
+            <div class="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/4 w-[600px] h-[600px] bg-gradient-to-br from-pink-100 to-purple-50 rounded-full mix-blend-multiply filter blur-3xl opacity-70 -z-10"></div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div id="features" class="py-24 bg-white relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto">
+                <h2 class="text-base text-secondary font-bold tracking-wide uppercase">Smart Shopping</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold text-gray-900 sm:text-4xl">
+                    Your Pocket Pharmacist
+                </p>
+                <p class="mt-4 text-lg text-gray-500">
+                    We scan millions of prices daily so you never overpay for essentials again.
+                </p>
+            </div>
+
+            <div class="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                <!-- Feature 1 -->
+                <div class="relative group">
+                    <div class="absolute -inset-0.5 bg-gradient-to-r from-pink-200 to-green-100 rounded-3xl blur opacity-25 group-hover:opacity-75 transition duration-500"></div>
+                    <div class="relative bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
+                        <div class="h-12 w-12 bg-pink-50 rounded-2xl flex items-center justify-center text-primary mb-6">
+                            <i class="fa-solid fa-barcode text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Barcode Scanner</h3>
+                        <p class="text-gray-500">Scan any product in-store. We'll instantly tell you if it's cheaper at the pharmacy next door.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="relative group">
+                    <div class="absolute -inset-0.5 bg-gradient-to-r from-green-100 to-blue-100 rounded-3xl blur opacity-25 group-hover:opacity-75 transition duration-500"></div>
+                    <div class="relative bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
+                        <div class="h-12 w-12 bg-green-50 rounded-2xl flex items-center justify-center text-secondary mb-6">
+                            <i class="fa-solid fa-globe text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Global Matching</h3>
+                        <p class="text-gray-500">Why pay local prices? We compare against <strong>iHerb</strong> and Amazon to find global shipping deals.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="relative group">
+                    <div class="absolute -inset-0.5 bg-gradient-to-r from-blue-100 to-pink-100 rounded-3xl blur opacity-25 group-hover:opacity-75 transition duration-500"></div>
+                    <div class="relative bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
+                        <div class="h-12 w-12 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-400 mb-6">
+                            <i class="fa-solid fa-location-dot text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Local Stock</h3>
+                        <p class="text-gray-500">Don't waste a trip. See exactly which branch near you has the item in stock right now.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-50 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+            <div class="flex space-x-6 mb-6">
+                <a href="#" class="text-gray-400 hover:text-primary transition">
+                    <span class="sr-only">Instagram</span>
+                    <i class="fa-brands fa-instagram text-2xl"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-primary transition">
+                    <span class="sr-only">Twitter</span>
+                    <i class="fa-brands fa-twitter text-2xl"></i>
+                </a>
+            </div>
+            <p class="text-center text-sm text-gray-400">
+                &copy; 2025 PharmMate. Made with <i class="fa-solid fa-heart text-primary mx-1"></i> in Israel.
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
