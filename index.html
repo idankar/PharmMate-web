@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="he" dir="rtl" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PharmMate - The Smart Pharmacy Scanner</title>
-    <meta name="description" content="Stop overpaying at Super-Pharm & Be. PharmMate compares prices instantly to find you the best deal in Israel.">
+    <title>Pharmy - השוואת מחירים חכמה</title>
+    <meta name="description" content="האפליקציה היחידה שמשווה מחירים בזמן אמת בין סופר-פארם, Be ו-Good Pharm.">
     
-    <meta property="og:title" content="PharmMate - Smart Pharmacy Shopping">
-    <meta property="og:description" content="I built an engine that compares pharmacy prices in Israel. Join the beta to stop overpaying.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://pharmmate.app"> 
-    
+    <meta property="og:url" content="https://www.pharmy.app/">
+    <meta property="og:title" content="Pharmy - השוואת מחירים חכמה">
+    <meta property="og:description" content="מנוע חכם להשוואת מחירים בפארם. הורידו עכשיו והתחילו לחסוך.">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -20,10 +20,9 @@
                         primary: '#EFA7B0', 
                         secondary: '#9CD3B9',
                         dark: '#2D3748',
-                        softbg: '#FFF5F7',
                     },
                     fontFamily: {
-                        sans: ['Nunito', 'sans-serif'],
+                        sans: ['Heebo', 'Nunito', 'sans-serif'],
                     },
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
@@ -40,13 +39,15 @@
     </script>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        body { font-family: 'Nunito', sans-serif; }
+        body { font-family: 'Heebo', sans-serif; }
+        /* When lang is EN, switch font */
+        body[lang="en"] { font-family: 'Nunito', sans-serif; }
+        
         .app-gradient { background: linear-gradient(180deg, #FFF0F3 0%, #FFFFFF 100%); }
         
-        /* CSS Phone Mockup Styling */
         .iphone-mockup {
             border: 12px solid #2d3748;
             border-radius: 3rem;
@@ -76,14 +77,25 @@
             <div class="flex justify-between items-center h-16">
                 <div class="flex-shrink-0 flex items-center gap-3">
                     <div class="h-10 w-10 bg-gradient-to-br from-primary to-pink-400 rounded-full flex items-center justify-center shadow-md text-white">
-                        <i class="fa-solid fa-heart-pulse"></i>
+                        <i class="fa-solid fa-capsules"></i>
                     </div>
-                    <span class="text-2xl font-extrabold text-dark tracking-tight">PharmMate</span>
+                    <span class="text-2xl font-extrabold text-dark tracking-tight">Pharmy</span>
                 </div>
-                <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#features" class="text-gray-600 hover:text-primary font-semibold transition">Features</a>
-                    <a href="#how-it-works" class="text-gray-600 hover:text-primary font-semibold transition">How it Works</a>
-                    <a href="#join" class="bg-dark text-white px-6 py-2.5 rounded-full shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition duration-200 font-bold">Get Early Access</a>
+                
+                <div class="flex gap-6 items-center">
+                    <div class="hidden md:flex gap-6">
+                        <a href="#features" class="text-gray-600 hover:text-primary font-semibold transition" data-key="features">פיצ׳רים</a>
+                        <a href="#how-it-works" class="text-gray-600 hover:text-primary font-semibold transition" data-key="howItWorks">איך זה עובד</a>
+                    </div>
+                    
+                    <button onclick="toggleLanguage()" class="bg-white border border-gray-200 px-3 py-1.5 rounded-lg text-sm font-bold hover:bg-gray-50 transition flex items-center gap-2 shadow-sm">
+                        <span id="lang-icon">🇺🇸</span>
+                        <span id="lang-text">English</span>
+                    </button>
+
+                    <a href="#download" class="hidden md:inline-block bg-dark text-white px-6 py-2.5 rounded-full shadow-lg hover:bg-gray-800 hover:-translate-y-0.5 transition duration-200 font-bold" data-key="downloadBtn">
+                        הורדה
+                    </a>
                 </div>
             </div>
         </div>
@@ -93,75 +105,72 @@
         <div class="max-w-7xl mx-auto w-full">
             <div class="relative z-10 pb-8 sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32 pt-10 px-4 sm:px-6 lg:px-8">
                 <main class="mt-10 mx-auto max-w-7xl sm:mt-12 md:mt-16 lg:mt-20 xl:mt-28">
-                    <div class="sm:text-center lg:text-left">
-                        <div class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-pink-600 uppercase bg-pink-100 rounded-full">
-                            Now in Open Beta
+                    <div class="sm:text-center lg:text-right" id="hero-text-container">
+                        
+                        <div class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-green-700 uppercase bg-green-100 rounded-full border border-green-200" data-key="badge">
+                            <i class="fa-solid fa-check-circle mr-1"></i> השקה רשמית
                         </div>
                         
-                        <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-                            <span class="block text-dark">Never Overpay for</span>
-                            <span class="block text-transparent bg-clip-text bg-gradient-to-r from-primary to-pink-500">Meds & Beauty</span>
+                        <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl leading-tight">
+                            <span class="block text-dark" data-key="headlineMain">די לשלם ביוקר</span>
+                            <span class="block text-transparent bg-clip-text bg-gradient-to-r from-primary to-pink-500" data-key="headlineSub">על הפארם שלכם</span>
                         </h1>
                         
-                        <p class="mt-4 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                            The intelligent scanner that compares <strong>Super-Pharm</strong>, <strong>Be</strong>, and <strong>Good Pharm</strong> instantly. Stop guessing, start saving.
+                        <p class="mt-4 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0" data-key="description">
+                            האפליקציה החכמה שמשווה בזמן אמת בין <strong>סופר-פארם</strong>, <strong>Be</strong>, ו-<strong>Good Pharm</strong>. סורקים את הברקוד וחוסכים 30-50% בכל קניה.
                         </p>
 
-                        <div id="join" class="mt-8 relative max-w-lg mx-auto lg:mx-0">
-                            <form action="#" onsubmit="alert('Thanks! You are on the list.'); return false;">
-                                <div class="relative">
-                                    <input 
-                                        type="email" 
-                                        required
-                                        class="block w-full pl-6 pr-40 py-4 border border-gray-200 rounded-full leading-5 bg-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary shadow-lg transition-shadow" 
-                                        placeholder="Enter your email for access..."
-                                    >
-                                    <div class="absolute inset-y-1.5 right-1.5">
-                                        <button type="submit" class="h-full px-8 bg-dark text-white font-bold rounded-full hover:bg-gray-800 transition duration-200 shadow-md">
-                                            Join Beta
-                                        </button>
-                                    </div>
+                        <div id="download" class="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                            <a href="#" class="flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-xl text-white bg-black hover:bg-gray-800 md:py-4 md:text-lg shadow-lg hover:shadow-xl transition transform hover:-translate-y-1">
+                                <i class="fa-brands fa-apple text-3xl ml-3 rtl:ml-3 rtl:mr-0 ltr:mr-3"></i>
+                                <div class="text-right rtl:text-right ltr:text-left">
+                                    <div class="text-xs uppercase font-semibold" data-key="appleSub">הורידו ב</div>
+                                    <div class="text-xl font-bold leading-none">App Store</div>
                                 </div>
-                                <p class="mt-3 text-xs text-gray-400 pl-4">
-                                    <i class="fa-solid fa-lock mr-1"></i> No spam. Unsubscribe anytime.
-                                </p>
-                            </form>
+                            </a>
+
+                            <a href="#" class="flex items-center justify-center px-6 py-3 border border-gray-200 text-base font-medium rounded-xl text-gray-700 bg-white hover:bg-gray-50 md:py-4 md:text-lg shadow-lg hover:shadow-xl transition transform hover:-translate-y-1">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Play_Arrow_logo.svg" class="w-7 h-7 ml-3 rtl:ml-3 rtl:mr-0 ltr:mr-3" alt="Google Play">
+                                <div class="text-right rtl:text-right ltr:text-left">
+                                    <div class="text-xs uppercase font-semibold text-gray-500" data-key="googleSub">זמין ב</div>
+                                    <div class="text-xl font-bold leading-none">Google Play</div>
+                                </div>
+                            </a>
                         </div>
                         
                         <div class="mt-6 flex flex-col sm:flex-row gap-3 text-sm text-gray-400 items-center sm:justify-center lg:justify-start">
-                            <span><i class="fa-solid fa-check-circle text-green-400 mr-1"></i> Live Price Data</span>
-                            <span><i class="fa-solid fa-check-circle text-green-400 mr-1"></i> 20k+ Products</span>
-                            <span><i class="fa-brands fa-apple mr-1"></i> iOS & Android Ready</span>
+                            <span><i class="fa-solid fa-shield-halved text-green-500 ml-1"></i> <span data-key="trust1">ללא צורך בהרשמה</span></span>
+                            <span class="hidden sm:inline">|</span>
+                            <span><i class="fa-solid fa-bolt text-yellow-400 ml-1"></i> <span data-key="trust2">מחירים בזמן אמת</span></span>
+                            <span class="hidden sm:inline">|</span>
+                            <span><i class="fa-solid fa-star text-orange-400 ml-1"></i> <span data-key="trust3">דירוג 5.0</span></span>
                         </div>
                     </div>
                 </main>
             </div>
         </div>
         
-        <div class="hidden lg:flex lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 items-center justify-center">
+        <div class="hidden lg:flex lg:absolute lg:inset-y-0 lg:left-0 lg:w-1/2 items-center justify-center rtl:left-0 rtl:right-auto ltr:right-0 ltr:left-auto">
             <div class="absolute w-[700px] h-[700px] bg-gradient-to-br from-pink-100 to-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-pulse"></div>
 
-            <div class="iphone-mockup bg-white h-[680px] w-[340px] relative z-20 animate-float transform rotate-[-2deg]">
+            <div class="iphone-mockup bg-white h-[680px] w-[340px] relative z-20 animate-float transform rotate-[2deg]">
                 <div class="iphone-notch"></div>
-                
-                <div class="h-full w-full flex flex-col bg-gray-50 overflow-hidden">
-                    
+                <div class="h-full w-full flex flex-col bg-gray-50 overflow-hidden" dir="rtl">
                     <div class="pt-12 px-6 pb-4 bg-white shadow-sm z-10">
                         <div class="flex justify-between items-center">
                             <div class="flex gap-2 items-center">
                                 <div class="h-8 w-8 bg-primary rounded-full flex items-center justify-center text-white text-xs">
-                                    <i class="fa-solid fa-heart"></i>
+                                    <i class="fa-solid fa-capsules"></i>
                                 </div>
-                                <span class="font-bold text-gray-800">PharmMate</span>
+                                <span class="font-bold text-gray-800">Pharmy</span>
                             </div>
                             <i class="fa-solid fa-bars text-gray-400"></i>
                         </div>
                         <div class="mt-4 relative">
-                            <input disabled placeholder="La Roche-Posay..." class="w-full bg-gray-100 rounded-xl py-2 px-10 text-sm">
-                            <i class="fa-solid fa-search absolute left-3 top-2.5 text-gray-400 text-xs"></i>
+                            <input disabled placeholder="חיפוש מוצר..." class="w-full bg-gray-100 rounded-xl py-2 px-10 text-sm">
+                            <i class="fa-solid fa-search absolute right-3 top-2.5 text-gray-400 text-xs"></i>
                         </div>
                     </div>
-
                     <div class="p-6 space-y-4">
                         <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
                             <div class="flex gap-4">
@@ -169,28 +178,18 @@
                                     <i class="fa-solid fa-bottle-droplet"></i>
                                 </div>
                                 <div>
-                                    <h4 class="font-bold text-gray-800 text-sm">La Roche Posay 50+</h4>
+                                    <h4 class="font-bold text-gray-800 text-sm">לה רוש פוזה 50+</h4>
                                     <div class="flex items-center gap-2 mt-1">
-                                        <span class="text-xs bg-green-100 text-green-600 px-2 py-0.5 rounded-full font-bold">Best Deal</span>
+                                        <span class="text-xs bg-green-100 text-green-600 px-2 py-0.5 rounded-full font-bold">המחיר הכי זול</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="mt-4 pt-4 border-t border-gray-50 flex justify-between items-end">
                                 <div>
-                                    <p class="text-xs text-gray-400">Found at <span class="font-bold text-gray-600">Be Pharm</span></p>
+                                    <p class="text-xs text-gray-400">נמצא ב- <span class="font-bold text-gray-600">Be Pharm</span></p>
                                     <p class="text-lg font-extrabold text-primary">₪89.90</p>
                                 </div>
-                                <button class="bg-dark text-white px-4 py-2 rounded-lg text-xs font-bold">Go to Store</button>
-                            </div>
-                        </div>
-
-                        <div class="bg-white p-3 rounded-xl border border-gray-100 opacity-70">
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-store text-gray-400 text-xs"></i></div>
-                                    <span class="text-xs font-bold text-gray-500">Super-Pharm</span>
-                                </div>
-                                <span class="text-sm font-bold text-gray-400 line-through">₪119.90</span>
+                                <button class="bg-dark text-white px-4 py-2 rounded-lg text-xs font-bold">נווט לסניף</button>
                             </div>
                         </div>
                     </div>
@@ -202,66 +201,158 @@
     <div id="features" class="py-20 bg-white relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-base text-primary font-bold tracking-wide uppercase">Why PharmMate?</h2>
-                <p class="mt-2 text-3xl leading-8 font-extrabold text-gray-900 sm:text-4xl">
-                    Your Personal Pricing Algorithm
+                <h2 class="text-base text-primary font-bold tracking-wide uppercase" data-key="whyTitle">למה Pharmy?</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold text-gray-900 sm:text-4xl" data-key="whySubtitle">
+                    אלגוריתם המחירים האישי שלך
                 </p>
             </div>
 
             <div class="grid grid-cols-1 gap-8 sm:grid-cols-3">
-                <div class="text-center p-6">
+                <div class="text-center p-6 border border-gray-50 rounded-2xl hover:shadow-lg transition">
                     <div class="w-16 h-16 bg-pink-50 rounded-2xl flex items-center justify-center text-primary mx-auto mb-4 text-2xl">
                         <i class="fa-solid fa-barcode"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-gray-900">Instant Barcode Scan</h3>
-                    <p class="mt-2 text-gray-500 text-sm">Standing in the aisle? Scan the product and we'll tell you if it's cheaper across the street.</p>
+                    <h3 class="text-lg font-bold text-gray-900" data-key="feat1Title">סריקת ברקוד מהירה</h3>
+                    <p class="mt-2 text-gray-500 text-sm" data-key="feat1Desc">נמצאים מול המדף? סרקו את המוצר וגלו מיד אם הוא זול יותר מעבר לכביש.</p>
                 </div>
 
-                <div class="text-center p-6">
+                <div class="text-center p-6 border border-gray-50 rounded-2xl hover:shadow-lg transition">
                     <div class="w-16 h-16 bg-green-50 rounded-2xl flex items-center justify-center text-green-500 mx-auto mb-4 text-2xl">
                         <i class="fa-solid fa-chart-line"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-gray-900">Price History</h3>
-                    <p class="mt-2 text-gray-500 text-sm">We track price trends so you know if that "Sale" is actually a good deal or a marketing trick.</p>
+                    <h3 class="text-lg font-bold text-gray-900" data-key="feat2Title">היסטוריית מחירים</h3>
+                    <p class="mt-2 text-gray-500 text-sm" data-key="feat2Desc">אנחנו עוקבים אחרי מגמות כדי שתדעו אם ה"מבצע" הוא אמיתי או סתם טריק שיווקי.</p>
                 </div>
 
-                <div class="text-center p-6">
+                <div class="text-center p-6 border border-gray-50 rounded-2xl hover:shadow-lg transition">
                     <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-500 mx-auto mb-4 text-2xl">
                         <i class="fa-solid fa-robot"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-gray-900">Smart Alternatives</h3>
-                    <p class="mt-2 text-gray-500 text-sm">We suggest generic equivalents with the exact same active ingredients for half the price.</p>
+                    <h3 class="text-lg font-bold text-gray-900" data-key="feat3Title">חלופות חכמות</h3>
+                    <p class="mt-2 text-gray-500 text-sm" data-key="feat3Desc">המערכת תמליץ על מוצרים גנריים עם אותם רכיבים פעילים בחצי מחיר.</p>
                 </div>
             </div>
         </div>
     </div>
 
-<footer class="bg-gray-50 border-t border-gray-100">
+    <footer class="bg-gray-50 border-t border-gray-100">
         <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
             
-            <div class="mb-4 md:mb-0">
-                <span class="font-bold text-gray-800 text-lg">PharmMate</span>
-                <p class="text-sm text-gray-400 mt-1">Smart shopping for Israel.</p>
+            <div class="mb-4 md:mb-0 text-center md:text-right">
+                <span class="font-bold text-gray-800 text-lg">Pharmy</span>
+                <p class="text-sm text-gray-400 mt-1" data-key="footerSlogan">קניות חכמות בישראל.</p>
             </div>
 
-            <div class="flex space-x-8 text-sm text-gray-500">
-                <a href="https://idankar.github.io/pharmmate-privacy/" target="_blank" class="hover:text-primary">Privacy Policy</a>
-                
-                <a href="#" class="hover:text-primary">Terms of Service</a>
-                
-                <a href="mailto:contact@pharmmate.app" class="hover:text-primary">Contact</a>
+            <div class="flex gap-8 text-sm text-gray-500">
+                <a href="#" class="hover:text-primary" data-key="privacy">מדיניות פרטיות</a>
+                <a href="#" class="hover:text-primary" data-key="terms">תנאי שימוש</a>
+                <a href="mailto:support@pharmy.app" class="hover:text-primary" data-key="contact">צור קשר</a>
             </div>
 
-            <div class="flex space-x-6 mt-4 md:mt-0">
-                <a href="#" class="text-gray-400 hover:text-primary transition">
-                    <i class="fa-brands fa-linkedin text-xl"></i>
-                </a>
-                <a href="#" class="text-gray-400 hover:text-primary transition">
-                    <i class="fa-brands fa-twitter text-xl"></i>
-                </a>
+            <div class="flex gap-6 mt-4 md:mt-0">
+                <a href="#" class="text-gray-400 hover:text-primary transition"><i class="fa-brands fa-linkedin text-xl"></i></a>
+                <a href="#" class="text-gray-400 hover:text-primary transition"><i class="fa-brands fa-twitter text-xl"></i></a>
             </div>
         </div>
     </footer>
 
+    <script>
+        const translations = {
+            he: {
+                features: "פיצ׳רים",
+                howItWorks: "איך זה עובד",
+                downloadBtn: "הורדה",
+                badge: '<i class="fa-solid fa-check-circle mr-1"></i> השקה רשמית',
+                headlineMain: "די לשלם ביוקר",
+                headlineSub: "על הפארם שלכם",
+                description: "האפליקציה החכמה שמשווה בזמן אמת בין <strong>סופר-פארם</strong>, <strong>Be</strong>, ו-<strong>Good Pharm</strong>. סורקים את הברקוד וחוסכים 30-50% בכל קניה.",
+                appleSub: "הורידו ב",
+                googleSub: "זמין ב",
+                trust1: "ללא צורך בהרשמה",
+                trust2: "מחירים בזמן אמת",
+                trust3: "דירוג 5.0",
+                whyTitle: "למה Pharmy?",
+                whySubtitle: "אלגוריתם המחירים האישי שלך",
+                feat1Title: "סריקת ברקוד מהירה",
+                feat1Desc: "נמצאים מול המדף? סרקו את המוצר וגלו מיד אם הוא זול יותר מעבר לכביש.",
+                feat2Title: "היסטוריית מחירים",
+                feat2Desc: "אנחנו עוקבים אחרי מגמות כדי שתדעו אם ה'מבצע' הוא אמיתי או סתם טריק שיווקי.",
+                feat3Title: "חלופות חכמות",
+                feat3Desc: "המערכת תמליץ על מוצרים גנריים עם אותם רכיבים פעילים בחצי מחיר.",
+                footerSlogan: "קניות חכמות בישראל.",
+                privacy: "מדיניות פרטיות",
+                terms: "תנאי שימוש",
+                contact: "צור קשר"
+            },
+            en: {
+                features: "Features",
+                howItWorks: "How it Works",
+                downloadBtn: "Download",
+                badge: '<i class="fa-solid fa-check-circle mr-1"></i> Official Launch',
+                headlineMain: "Never Overpay for",
+                headlineSub: "Meds & Beauty",
+                description: "The intelligent scanner that compares <strong>Super-Pharm</strong>, <strong>Be</strong>, and <strong>Good Pharm</strong> instantly. Scan any barcode and save 30-50% on every trip.",
+                appleSub: "Download on the",
+                googleSub: "Get it on",
+                trust1: "No Registration Needed",
+                trust2: "Live Prices",
+                trust3: "5.0 Rating",
+                whyTitle: "Why Pharmy?",
+                whySubtitle: "Your Personal Pricing Algorithm",
+                feat1Title: "Instant Barcode Scan",
+                feat1Desc: "Standing in the aisle? Scan the product and we'll tell you if it's cheaper across the street.",
+                feat2Title: "Price History",
+                feat2Desc: "We track price trends so you know if that 'Sale' is actually a good deal or a marketing trick.",
+                feat3Title: "Smart Alternatives",
+                feat3Desc: "We suggest generic equivalents with the exact same active ingredients for half the price.",
+                footerSlogan: "Smart shopping for Israel.",
+                privacy: "Privacy Policy",
+                terms: "Terms of Service",
+                contact: "Contact"
+            }
+        };
+
+        let currentLang = 'he';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'he' ? 'en' : 'he';
+            
+            // 1. Update HTML tag direction and lang
+            document.documentElement.lang = currentLang;
+            document.documentElement.dir = currentLang === 'he' ? 'rtl' : 'ltr';
+            document.body.setAttribute('lang', currentLang);
+
+            // 2. Update Button Text
+            const icon = document.getElementById('lang-icon');
+            const text = document.getElementById('lang-text');
+            if (currentLang === 'he') {
+                icon.innerText = "🇺🇸";
+                text.innerText = "English";
+                // Flip phone back
+                document.querySelector('.iphone-mockup').classList.remove('rotate-[-2deg]');
+                document.querySelector('.iphone-mockup').classList.add('rotate-[2deg]');
+                
+                // Flip absolute positioning classes
+                const mockupContainer = document.querySelector('.lg\\:absolute');
+                mockupContainer.classList.remove('ltr:right-0', 'ltr:left-auto');
+                mockupContainer.classList.add('rtl:left-0', 'rtl:right-auto');
+
+            } else {
+                icon.innerText = "🇮🇱";
+                text.innerText = "עברית";
+                // Flip phone angle for fun
+                document.querySelector('.iphone-mockup').classList.remove('rotate-[2deg]');
+                document.querySelector('.iphone-mockup').classList.add('rotate-[-2deg]');
+            }
+
+            // 3. Update Text Content
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (translations[currentLang][key]) {
+                    el.innerHTML = translations[currentLang][key];
+                }
+            });
+        }
+    </script>
 </body>
 </html>
