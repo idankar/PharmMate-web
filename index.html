@@ -499,54 +499,92 @@
                 </p>
             </div>
 
-            <!-- Hero Feature -->
-            <div class="bg-gradient-to-br from-primary/5 to-secondary/5 rounded-3xl p-8 md:p-12 mb-12 reveal">
-                <div class="grid md:grid-cols-2 gap-8 items-center">
-                    <div>
-                        <div class="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-full text-primary font-bold text-sm mb-4">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i>
-                            <span data-key="heroFeatBadge">טכנולוגיה חכמה</span>
+            <!-- Hero Feature: Smart Cart Optimizer -->
+            <div class="bg-gradient-to-br from-primary/5 via-white to-secondary/5 rounded-3xl p-8 md:p-12 mb-12 reveal overflow-hidden relative">
+                <!-- Decorative background -->
+                <div class="absolute top-0 left-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl"></div>
+                <div class="absolute bottom-0 right-0 w-40 h-40 bg-secondary/10 rounded-full blur-3xl"></div>
+
+                <div class="relative z-10">
+                    <!-- Header -->
+                    <div class="text-center mb-10">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 bg-dark/5 rounded-full text-dark font-semibold text-sm mb-4">
+                            <i class="fa-solid fa-microchip"></i>
+                            <span data-key="heroFeatBadge">אופטימיזציה חכמה</span>
                         </div>
-                        <h3 class="text-2xl md:text-3xl font-black text-dark mb-4" data-key="heroFeatTitle">
-                            קניה חכמה - חלוקה אופטימלית
+                        <h3 class="text-2xl md:text-3xl font-black text-dark mb-3" data-key="heroFeatTitle">
+                            שלוש אסטרטגיות. בחירה אחת חכמה.
                         </h3>
-                        <p class="text-gray-500 mb-6" data-key="heroFeatDesc">
-                            האלגוריתם שלנו מנתח את כל העגלה ומציע לכם איפה לקנות כל מוצר כדי לחסוך הכי הרבה. גם אם זה אומר לפצל בין שתי חנויות.
+                        <p class="text-gray-500 max-w-2xl mx-auto" data-key="heroFeatDesc">
+                            הוסיפו מוצרים לעגלה והאלגוריתם יחשב בזמן אמת את הדרך האופטימלית לקנות - בין אם זה בחנות אחת או בפיצול חכם בין כמה חנויות.
                         </p>
-                        <div class="flex flex-wrap gap-3">
-                            <span class="px-3 py-1.5 bg-white rounded-lg text-sm font-medium text-gray-600 shadow-sm" data-key="heroFeatTag1">עגלת קניות חכמה</span>
-                            <span class="px-3 py-1.5 bg-white rounded-lg text-sm font-medium text-gray-600 shadow-sm" data-key="heroFeatTag2">חלוקה בין חנויות</span>
-                            <span class="px-3 py-1.5 bg-white rounded-lg text-sm font-medium text-gray-600 shadow-sm" data-key="heroFeatTag3">חיסכון מקסימלי</span>
+                    </div>
+
+                    <!-- Three Strategy Cards -->
+                    <div class="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+                        <!-- Strategy 1: Single Store -->
+                        <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition">
+                            <div class="flex items-center gap-2 mb-3">
+                                <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center">
+                                    <i class="fa-solid fa-store text-blue-500 text-sm"></i>
+                                </div>
+                                <span class="font-bold text-dark text-sm" data-key="stratSingle">חנות אחת</span>
+                            </div>
+                            <div class="text-2xl font-black text-dark mb-1">₪187</div>
+                            <div class="text-xs text-gray-400 mb-3" data-key="stratSingleDesc">הכי נוח - הכל במקום אחד</div>
+                            <div class="flex items-center gap-2 text-xs text-gray-500">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <span>סופר-פארם</span>
+                            </div>
+                        </div>
+
+                        <!-- Strategy 2: Smart Split (Recommended) -->
+                        <div class="bg-white rounded-2xl p-5 shadow-md border-2 border-secondary relative transform md:-translate-y-2">
+                            <div class="absolute -top-3 right-4 px-3 py-1 bg-secondary text-white text-xs font-bold rounded-full" data-key="stratRecommended">
+                                מומלץ
+                            </div>
+                            <div class="flex items-center gap-2 mb-3">
+                                <div class="w-8 h-8 bg-secondary/10 rounded-lg flex items-center justify-center">
+                                    <i class="fa-solid fa-code-branch text-secondary text-sm"></i>
+                                </div>
+                                <span class="font-bold text-dark text-sm" data-key="stratSplit">פיצול חכם</span>
+                            </div>
+                            <div class="text-2xl font-black text-secondary mb-1">₪149</div>
+                            <div class="text-xs text-gray-400 mb-3" data-key="stratSplitDesc">איזון בין נוחות לחיסכון</div>
+                            <div class="flex items-center gap-2 text-xs text-gray-500">
+                                <i class="fa-solid fa-store"></i>
+                                <span>2 חנויות</span>
+                                <span class="mx-1">•</span>
+                                <span class="text-secondary font-bold" data-key="stratSplitSave">חיסכון ₪38</span>
+                            </div>
+                        </div>
+
+                        <!-- Strategy 3: Maximum Savings -->
+                        <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition">
+                            <div class="flex items-center gap-2 mb-3">
+                                <div class="w-8 h-8 bg-amber-50 rounded-lg flex items-center justify-center">
+                                    <i class="fa-solid fa-coins text-amber-500 text-sm"></i>
+                                </div>
+                                <span class="font-bold text-dark text-sm" data-key="stratMax">חיסכון מקסימלי</span>
+                            </div>
+                            <div class="text-2xl font-black text-dark mb-1">₪141</div>
+                            <div class="text-xs text-gray-400 mb-3" data-key="stratMaxDesc">כל מוצר במחיר הזול ביותר</div>
+                            <div class="flex items-center gap-2 text-xs text-gray-500">
+                                <i class="fa-solid fa-store"></i>
+                                <span>4 חנויות</span>
+                                <span class="mx-1">•</span>
+                                <span class="text-amber-600 font-bold" data-key="stratMaxSave">חיסכון ₪46</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="flex justify-center">
-                        <div class="bg-white rounded-2xl p-6 shadow-lg max-w-sm w-full">
-                            <div class="flex justify-between items-center mb-4">
-                                <span class="font-bold text-dark" data-key="heroFeatCartTitle">סיכום עגלה</span>
-                                <span class="text-sm text-gray-400">3 מוצרים</span>
-                            </div>
-                            <div class="space-y-3 mb-4">
-                                <div class="flex justify-between text-sm">
-                                    <span class="text-gray-500" data-key="heroFeatStore1">Be Pharm (2 מוצרים)</span>
-                                    <span class="font-bold">₪89</span>
-                                </div>
-                                <div class="flex justify-between text-sm">
-                                    <span class="text-gray-500" data-key="heroFeatStore2">Good Pharm (1 מוצר)</span>
-                                    <span class="font-bold">₪35</span>
-                                </div>
-                            </div>
-                            <div class="border-t pt-4">
-                                <div class="flex justify-between">
-                                    <span class="text-gray-400" data-key="heroFeatTotal">סה״כ</span>
-                                    <div class="text-right">
-                                        <span class="text-gray-400 line-through text-sm">₪178</span>
-                                        <span class="font-black text-xl text-secondary mr-2">₪124</span>
-                                    </div>
-                                </div>
-                                <div class="text-left mt-1">
-                                    <span class="text-sm font-bold text-secondary" data-key="heroFeatSaved">חסכתם ₪54!</span>
-                                </div>
-                            </div>
+
+                    <!-- Bottom insight -->
+                    <div class="text-center mt-8">
+                        <div class="inline-flex items-center gap-3 px-5 py-3 bg-white rounded-full shadow-sm border border-gray-100">
+                            <i class="fa-solid fa-lightbulb text-accent"></i>
+                            <span class="text-sm text-gray-600" data-key="heroFeatInsight">
+                                האלגוריתם ממליץ על <strong class="text-dark">פיצול חכם</strong> - חיסכון משמעותי בהליכה לחנות נוספת אחת
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -807,17 +845,19 @@
                 featLabel: "יתרונות",
                 featTitle: "למה Pharmy?",
                 featSubtitle: "לא סתם עוד אפליקציית מחירים",
-                heroFeatBadge: "טכנולוגיה חכמה",
-                heroFeatTitle: "קניה חכמה - חלוקה אופטימלית",
-                heroFeatDesc: "האלגוריתם שלנו מנתח את כל העגלה ומציע לכם איפה לקנות כל מוצר כדי לחסוך הכי הרבה. גם אם זה אומר לפצל בין שתי חנויות.",
-                heroFeatTag1: "עגלת קניות חכמה",
-                heroFeatTag2: "חלוקה בין חנויות",
-                heroFeatTag3: "חיסכון מקסימלי",
-                heroFeatCartTitle: "סיכום עגלה",
-                heroFeatStore1: "Be Pharm (2 מוצרים)",
-                heroFeatStore2: "Good Pharm (1 מוצר)",
-                heroFeatTotal: "סה״כ",
-                heroFeatSaved: "חסכתם ₪54!",
+                heroFeatBadge: "אופטימיזציה חכמה",
+                heroFeatTitle: "שלוש אסטרטגיות. בחירה אחת חכמה.",
+                heroFeatDesc: "הוסיפו מוצרים לעגלה והאלגוריתם יחשב בזמן אמת את הדרך האופטימלית לקנות - בין אם זה בחנות אחת או בפיצול חכם בין כמה חנויות.",
+                stratSingle: "חנות אחת",
+                stratSingleDesc: "הכי נוח - הכל במקום אחד",
+                stratSplit: "פיצול חכם",
+                stratSplitDesc: "איזון בין נוחות לחיסכון",
+                stratSplitSave: "חיסכון ₪38",
+                stratMax: "חיסכון מקסימלי",
+                stratMaxDesc: "כל מוצר במחיר הזול ביותר",
+                stratMaxSave: "חיסכון ₪46",
+                stratRecommended: "מומלץ",
+                heroFeatInsight: "האלגוריתם ממליץ על <strong class=\"text-dark\">פיצול חכם</strong> - חיסכון משמעותי בהליכה לחנות נוספת אחת",
                 feat1Title: "סריקה מהירה",
                 feat1Desc: "סריקת ברקוד בשנייה אחת. תוצאות מיידיות מכל הרשתות.",
                 feat2Title: "היסטוריית מחירים",
@@ -906,17 +946,19 @@
                 featLabel: "Benefits",
                 featTitle: "Why Pharmy?",
                 featSubtitle: "Not just another price comparison app",
-                heroFeatBadge: "Smart Technology",
-                heroFeatTitle: "Smart Shopping - Optimal Split",
-                heroFeatDesc: "Our algorithm analyzes your entire cart and suggests where to buy each product to maximize savings. Even if it means splitting between two stores.",
-                heroFeatTag1: "Smart Cart",
-                heroFeatTag2: "Store Split",
-                heroFeatTag3: "Maximum Savings",
-                heroFeatCartTitle: "Cart Summary",
-                heroFeatStore1: "Be Pharm (2 items)",
-                heroFeatStore2: "Good Pharm (1 item)",
-                heroFeatTotal: "Total",
-                heroFeatSaved: "You saved ₪54!",
+                heroFeatBadge: "Smart Optimization",
+                heroFeatTitle: "Three Strategies. One Smart Choice.",
+                heroFeatDesc: "Add products to your cart and our algorithm calculates the optimal way to shop in real-time - whether at one store or by smartly splitting between a few stores.",
+                stratSingle: "Single Store",
+                stratSingleDesc: "Most convenient - everything in one place",
+                stratSplit: "Smart Split",
+                stratSplitDesc: "Balance between convenience and savings",
+                stratSplitSave: "Save ₪38",
+                stratMax: "Maximum Savings",
+                stratMaxDesc: "Each product at its lowest price",
+                stratMaxSave: "Save ₪46",
+                stratRecommended: "Recommended",
+                heroFeatInsight: "The algorithm recommends <strong class=\"text-dark\">Smart Split</strong> - significant savings by visiting one additional store",
                 feat1Title: "Fast Scanning",
                 feat1Desc: "Scan a barcode in one second. Instant results from all retailers.",
                 feat2Title: "Price History",
