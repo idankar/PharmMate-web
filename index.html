@@ -3,13 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pharmy - השוואת מחירים חכמה</title>
-    <meta name="description" content="האפליקציה היחידה שמשווה מחירים בזמן אמת בין סופר-פארם, Be ו-Good Pharm.">
-    
+    <title>Pharmy - השוואת מחירים חכמה לפארם</title>
+    <meta name="description" content="משווים מחירים ב-20+ רשתות פארם וסופרים בישראל. סורקים ברקוד, חוסכים עד 50%. חינם לגמרי.">
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.pharmy.app/">
-    <meta property="og:title" content="Pharmy - השוואת מחירים חכמה">
-    <meta property="og:description" content="מנוע חכם להשוואת מחירים בפארם. הורידו עכשיו והתחילו לחסוך.">
+    <meta property="og:title" content="Pharmy - השוואת מחירים חכמה לפארם">
+    <meta property="og:description" content="20+ רשתות. 100,000+ מחירים. חיסכון של עד 50%. חינם.">
+    <meta property="og:image" content="https://www.pharmy.app/og-image.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pharmy - השוואת מחירים חכמה">
+    <meta name="twitter:description" content="סורקים. משווים. חוסכים. חינם לגמרי.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -17,298 +27,1047 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#EFA7B0', 
+                        primary: '#EFA7B0',
+                        'primary-dark': '#E8919C',
                         secondary: '#9CD3B9',
-                        dark: '#2D3748',
+                        'secondary-dark': '#7BC4A0',
+                        accent: '#FFD166',
+                        dark: '#1A1A2E',
+                        'dark-light': '#2D3748',
                     },
                     fontFamily: {
                         sans: ['Heebo', 'Nunito', 'sans-serif'],
                     },
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
+                        'float-slow': 'float 8s ease-in-out infinite',
+                        'float-delayed': 'float 6s ease-in-out 2s infinite',
+                        'pulse-soft': 'pulse-soft 3s ease-in-out infinite',
+                        'slide-up': 'slide-up 0.6s ease-out',
+                        'fade-in': 'fade-in 0.8s ease-out',
+                        'scale-in': 'scale-in 0.5s ease-out',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
                     },
                     keyframes: {
                         float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-10px)' },
+                            '0%, 100%': { transform: 'translateY(0) rotate(2deg)' },
+                            '50%': { transform: 'translateY(-15px) rotate(2deg)' },
+                        },
+                        'pulse-soft': {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0.7' },
+                        },
+                        'slide-up': {
+                            '0%': { transform: 'translateY(30px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        'fade-in': {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        'scale-in': {
+                            '0%': { transform: 'scale(0.9)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' },
+                        },
+                        'glow': {
+                            '0%': { boxShadow: '0 0 20px rgba(239, 167, 176, 0.4)' },
+                            '100%': { boxShadow: '0 0 40px rgba(239, 167, 176, 0.8)' },
                         }
                     }
                 }
             }
         }
     </script>
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
     <style>
         body { font-family: 'Heebo', sans-serif; }
-        /* When lang is EN, switch font */
         body[lang="en"] { font-family: 'Nunito', sans-serif; }
-        
-        .app-gradient { background: linear-gradient(180deg, #FFF0F3 0%, #FFFFFF 100%); }
-        
+
+        /* Gradient backgrounds */
+        .hero-gradient {
+            background: linear-gradient(135deg, #FFF5F7 0%, #FFFFFF 50%, #F0FDF4 100%);
+        }
+
+        .section-gradient {
+            background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFA 100%);
+        }
+
+        /* Glass morphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        /* iPhone mockup */
         .iphone-mockup {
-            border: 12px solid #2d3748;
+            border: 10px solid #1A1A2E;
             border-radius: 3rem;
             overflow: hidden;
             position: relative;
-            box-shadow: 0 25px 50px -12px rgba(239, 167, 176, 0.6);
-            background: white;
+            box-shadow:
+                0 50px 100px -20px rgba(239, 167, 176, 0.5),
+                0 30px 60px -30px rgba(0, 0, 0, 0.3),
+                inset 0 0 0 2px rgba(255, 255, 255, 0.1);
+            background: #1A1A2E;
         }
+
         .iphone-notch {
             position: absolute;
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 40%;
-            height: 25px;
-            background: #2d3748;
-            border-bottom-left-radius: 14px;
-            border-bottom-right-radius: 14px;
+            width: 35%;
+            height: 28px;
+            background: #1A1A2E;
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 16px;
             z-index: 10;
+        }
+
+        .iphone-notch::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 8px;
+            background: #2D3748;
+            border-radius: 50%;
+        }
+
+        /* Floating elements */
+        .floating-icon {
+            position: absolute;
+            background: white;
+            border-radius: 1rem;
+            padding: 0.75rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* CTA button glow */
+        .cta-glow {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-glow::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* Stats counter animation */
+        .stat-number {
+            background: linear-gradient(135deg, #EFA7B0, #E8919C);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Retailer logos grayscale hover */
+        .retailer-logo {
+            filter: grayscale(100%);
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+
+        .retailer-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        /* Feature card hover */
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Step connector line */
+        .step-line {
+            position: absolute;
+            top: 2rem;
+            left: 50%;
+            width: calc(100% - 4rem);
+            height: 2px;
+            background: linear-gradient(90deg, #EFA7B0, #9CD3B9);
+            z-index: 0;
+        }
+
+        [dir="ltr"] .step-line {
+            left: calc(50% + 2rem);
+        }
+
+        [dir="rtl"] .step-line {
+            right: calc(50% + 2rem);
+            left: auto;
         }
     </style>
 </head>
-<body class="app-gradient text-gray-700 min-h-screen flex flex-col">
+<body class="text-gray-700 min-h-screen flex flex-col overflow-x-hidden">
 
-    <nav class="bg-transparent pt-6 w-full z-50">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center gap-3">
-                    <div class="h-10 w-10 bg-gradient-to-br from-primary to-pink-400 rounded-full flex items-center justify-center shadow-md text-white">
-                        <i class="fa-solid fa-capsules"></i>
+                    <div class="h-11 w-11 bg-gradient-to-br from-primary to-pink-400 rounded-2xl flex items-center justify-center shadow-lg text-white transform hover:scale-105 transition">
+                        <i class="fa-solid fa-capsules text-lg"></i>
                     </div>
-                    <span class="text-2xl font-extrabold text-dark tracking-tight">Pharmy</span>
+                    <span class="text-2xl font-black text-dark tracking-tight">Pharmy</span>
                 </div>
-                
+
+                <!-- Nav Links -->
                 <div class="flex gap-6 items-center">
-                    <div class="hidden md:flex gap-6">
-                        <a href="#features" class="text-gray-600 hover:text-primary font-semibold transition" data-key="features">פיצ׳רים</a>
-                        <a href="#how-it-works" class="text-gray-600 hover:text-primary font-semibold transition" data-key="howItWorks">איך זה עובד</a>
+                    <div class="hidden md:flex gap-8">
+                        <a href="#features" class="text-gray-600 hover:text-primary font-semibold transition" data-key="navFeatures">למה Pharmy</a>
+                        <a href="#how-it-works" class="text-gray-600 hover:text-primary font-semibold transition" data-key="navHow">איך זה עובד</a>
+                        <a href="#retailers" class="text-gray-600 hover:text-primary font-semibold transition" data-key="navRetailers">רשתות</a>
                     </div>
-                    
-                    <button onclick="toggleLanguage()" class="bg-white border border-gray-200 px-3 py-1.5 rounded-lg text-sm font-bold hover:bg-gray-50 transition flex items-center gap-2 shadow-sm">
+
+                    <!-- Language Toggle -->
+                    <button onclick="toggleLanguage()" class="glass border border-gray-200 px-3 py-2 rounded-xl text-sm font-bold hover:bg-white transition flex items-center gap-2 shadow-sm">
                         <span id="lang-icon">🇺🇸</span>
-                        <span id="lang-text">English</span>
+                        <span id="lang-text" class="hidden sm:inline">English</span>
                     </button>
 
-                    <a href="#download" class="hidden md:inline-block bg-dark text-white px-6 py-2.5 rounded-full shadow-lg hover:bg-gray-800 hover:-translate-y-0.5 transition duration-200 font-bold" data-key="downloadBtn">
-                        הורדה
+                    <!-- CTA Button -->
+                    <a href="#download" class="hidden md:inline-block bg-dark text-white px-6 py-3 rounded-2xl shadow-lg hover:bg-dark-light hover:-translate-y-0.5 transition duration-200 font-bold text-sm" data-key="navDownload">
+                        הורדה חינם
                     </a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <div class="relative overflow-hidden flex-grow flex items-center">
-        <div class="max-w-7xl mx-auto w-full">
-            <div class="relative z-10 pb-8 sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32 pt-10 px-4 sm:px-6 lg:px-8">
-                <main class="mt-10 mx-auto max-w-7xl sm:mt-12 md:mt-16 lg:mt-20 xl:mt-28">
-                    <div class="sm:text-center lg:text-right" id="hero-text-container">
-                        
-                        <div class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-green-700 uppercase bg-green-100 rounded-full border border-green-200" data-key="badge">
-                            <i class="fa-solid fa-check-circle mr-1"></i> השקה רשמית
-                        </div>
-                        
-                        <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl leading-tight">
-                            <span class="block text-dark" data-key="headlineMain">די לשלם ביוקר</span>
-                            <span class="block text-transparent bg-clip-text bg-gradient-to-r from-primary to-pink-500" data-key="headlineSub">על הפארם שלכם</span>
-                        </h1>
-                        
-                        <p class="mt-4 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0" data-key="description">
-                            האפליקציה החכמה שמשווה בזמן אמת בין <strong>סופר-פארם</strong>, <strong>Be</strong>, ו-<strong>Good Pharm</strong>. סורקים את הברקוד וחוסכים 30-50% בכל קניה.
-                        </p>
-
-                        <div id="download" class="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                            <a href="#" class="flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-xl text-white bg-black hover:bg-gray-800 md:py-4 md:text-lg shadow-lg hover:shadow-xl transition transform hover:-translate-y-1">
-                                <i class="fa-brands fa-apple text-3xl ml-3 rtl:ml-3 rtl:mr-0 ltr:mr-3"></i>
-                                <div class="text-right rtl:text-right ltr:text-left">
-                                    <div class="text-xs uppercase font-semibold" data-key="appleSub">הורידו ב</div>
-                                    <div class="text-xl font-bold leading-none">App Store</div>
-                                </div>
-                            </a>
-
-                            <a href="#" class="flex items-center justify-center px-6 py-3 border border-gray-200 text-base font-medium rounded-xl text-gray-700 bg-white hover:bg-gray-50 md:py-4 md:text-lg shadow-lg hover:shadow-xl transition transform hover:-translate-y-1">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Play_Arrow_logo.svg" class="w-7 h-7 ml-3 rtl:ml-3 rtl:mr-0 ltr:mr-3" alt="Google Play">
-                                <div class="text-right rtl:text-right ltr:text-left">
-                                    <div class="text-xs uppercase font-semibold text-gray-500" data-key="googleSub">זמין ב</div>
-                                    <div class="text-xl font-bold leading-none">Google Play</div>
-                                </div>
-                            </a>
-                        </div>
-                        
-                        <div class="mt-6 flex flex-col sm:flex-row gap-3 text-sm text-gray-400 items-center sm:justify-center lg:justify-start">
-                            <span><i class="fa-solid fa-shield-halved text-green-500 ml-1"></i> <span data-key="trust1">ללא צורך בהרשמה</span></span>
-                            <span class="hidden sm:inline">|</span>
-                            <span><i class="fa-solid fa-bolt text-yellow-400 ml-1"></i> <span data-key="trust2">מחירים בזמן אמת</span></span>
-                            <span class="hidden sm:inline">|</span>
-                            <span><i class="fa-solid fa-star text-orange-400 ml-1"></i> <span data-key="trust3">דירוג 5.0</span></span>
-                        </div>
-                    </div>
-                </main>
-            </div>
+    <!-- Hero Section -->
+    <section class="hero-gradient relative min-h-screen flex items-center pt-20">
+        <!-- Background decorations -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute top-20 right-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-20 left-10 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
         </div>
-        
-        <div class="hidden lg:flex lg:absolute lg:inset-y-0 lg:left-0 lg:w-1/2 items-center justify-center rtl:left-0 rtl:right-auto ltr:right-0 ltr:left-auto">
-            <div class="absolute w-[700px] h-[700px] bg-gradient-to-br from-pink-100 to-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-pulse"></div>
 
-            <div class="iphone-mockup bg-white h-[680px] w-[340px] relative z-20 animate-float transform rotate-[2deg]">
-                <div class="iphone-notch"></div>
-                <div class="h-full w-full flex flex-col bg-gray-50 overflow-hidden" dir="rtl">
-                    <div class="pt-12 px-6 pb-4 bg-white shadow-sm z-10">
-                        <div class="flex justify-between items-center">
-                            <div class="flex gap-2 items-center">
-                                <div class="h-8 w-8 bg-primary rounded-full flex items-center justify-center text-white text-xs">
-                                    <i class="fa-solid fa-capsules"></i>
-                                </div>
-                                <span class="font-bold text-gray-800">Pharmy</span>
-                            </div>
-                            <i class="fa-solid fa-bars text-gray-400"></i>
+        <div class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+                <!-- Text Content -->
+                <div class="text-center lg:text-right" id="hero-text-container">
+                    <!-- Badge -->
+                    <div class="inline-flex items-center gap-2 px-4 py-2 mb-6 text-sm font-semibold text-secondary-dark bg-secondary/10 rounded-full border border-secondary/20 animate-fade-in">
+                        <span class="flex h-2 w-2 relative">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-secondary-dark"></span>
+                        </span>
+                        <span data-key="badge">עדכון מחירים יומי</span>
+                    </div>
+
+                    <!-- Headline -->
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-dark leading-tight animate-slide-up">
+                        <span class="block" data-key="headlineMain">משווים מחירים.</span>
+                        <span class="block text-transparent bg-clip-text bg-gradient-to-l from-primary to-pink-500" data-key="headlineSub">חוסכים בגדול.</span>
+                    </h1>
+
+                    <!-- Description -->
+                    <p class="mt-6 text-lg sm:text-xl text-gray-500 max-w-xl mx-auto lg:mx-0 leading-relaxed animate-slide-up" style="animation-delay: 0.1s" data-key="description">
+                        האפליקציה החכמה שסורקת ברקוד ומשווה מחירים בזמן אמת בין <strong class="text-gray-700">20+ רשתות</strong> פארם וסופרים בישראל.
+                    </p>
+
+                    <!-- Stats Bar -->
+                    <div class="mt-8 flex flex-wrap justify-center lg:justify-start gap-6 sm:gap-10 animate-slide-up" style="animation-delay: 0.2s">
+                        <div class="text-center">
+                            <div class="text-3xl sm:text-4xl font-black stat-number">20+</div>
+                            <div class="text-sm text-gray-400 font-medium" data-key="statRetailers">רשתות</div>
                         </div>
-                        <div class="mt-4 relative">
-                            <input disabled placeholder="חיפוש מוצר..." class="w-full bg-gray-100 rounded-xl py-2 px-10 text-sm">
-                            <i class="fa-solid fa-search absolute right-3 top-2.5 text-gray-400 text-xs"></i>
+                        <div class="text-center">
+                            <div class="text-3xl sm:text-4xl font-black stat-number">100K+</div>
+                            <div class="text-sm text-gray-400 font-medium" data-key="statPrices">מחירים</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl sm:text-4xl font-black stat-number">50%</div>
+                            <div class="text-sm text-gray-400 font-medium" data-key="statSavings">חיסכון</div>
                         </div>
                     </div>
-                    <div class="p-6 space-y-4">
-                        <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
-                            <div class="flex gap-4">
-                                <div class="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center text-gray-300">
-                                    <i class="fa-solid fa-bottle-droplet"></i>
+
+                    <!-- CTA Buttons -->
+                    <div id="download" class="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-slide-up" style="animation-delay: 0.3s">
+                        <a href="#" class="cta-glow flex items-center justify-center px-8 py-4 text-base font-bold rounded-2xl text-white bg-dark hover:bg-dark-light shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1">
+                            <i class="fa-brands fa-apple text-2xl ml-3 rtl:ml-3 ltr:mr-3"></i>
+                            <div class="text-right rtl:text-right ltr:text-left">
+                                <div class="text-xs opacity-80 font-medium" data-key="appleSub">הורידו מ-</div>
+                                <div class="text-lg font-bold leading-none">App Store</div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="flex items-center justify-center px-8 py-4 text-base font-bold rounded-2xl text-dark bg-white border-2 border-gray-100 hover:border-primary/30 hover:bg-gray-50 shadow-lg hover:shadow-xl transition transform hover:-translate-y-1">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Play_Arrow_logo.svg" class="w-6 h-6 ml-3 rtl:ml-3 ltr:mr-3" alt="Google Play">
+                            <div class="text-right rtl:text-right ltr:text-left">
+                                <div class="text-xs text-gray-400 font-medium" data-key="googleSub">זמין ב-</div>
+                                <div class="text-lg font-bold leading-none">Google Play</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Trust Badges -->
+                    <div class="mt-8 flex flex-wrap gap-4 justify-center lg:justify-start text-sm animate-fade-in" style="animation-delay: 0.4s">
+                        <span class="flex items-center gap-2 px-3 py-1.5 bg-white rounded-full shadow-sm border border-gray-100">
+                            <i class="fa-solid fa-shield-check text-secondary"></i>
+                            <span class="text-gray-500" data-key="trust1">ללא הרשמה</span>
+                        </span>
+                        <span class="flex items-center gap-2 px-3 py-1.5 bg-white rounded-full shadow-sm border border-gray-100">
+                            <i class="fa-solid fa-gift text-primary"></i>
+                            <span class="text-gray-500" data-key="trust2">חינם לגמרי</span>
+                        </span>
+                        <span class="flex items-center gap-2 px-3 py-1.5 bg-white rounded-full shadow-sm border border-gray-100">
+                            <i class="fa-solid fa-bolt text-accent"></i>
+                            <span class="text-gray-500" data-key="trust3">מחירים בזמן אמת</span>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Phone Mockup -->
+                <div class="hidden lg:flex justify-center items-center relative">
+                    <!-- Floating decorative elements -->
+                    <div class="floating-icon top-10 right-0 animate-float-slow z-30">
+                        <div class="flex items-center gap-2 text-sm font-bold text-secondary-dark">
+                            <i class="fa-solid fa-arrow-down text-secondary"></i>
+                            <span>-42%</span>
+                        </div>
+                    </div>
+                    <div class="floating-icon bottom-32 left-0 animate-float-delayed z-30">
+                        <div class="flex items-center gap-2 text-sm font-bold text-primary">
+                            <i class="fa-solid fa-check-circle"></i>
+                            <span data-key="floatCheapest">הכי זול!</span>
+                        </div>
+                    </div>
+
+                    <!-- Background glow -->
+                    <div class="absolute w-[500px] h-[500px] bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full blur-3xl"></div>
+
+                    <!-- Phone -->
+                    <div class="iphone-mockup w-[320px] h-[650px] relative z-20 animate-float">
+                        <div class="iphone-notch"></div>
+                        <div class="h-full w-full flex flex-col bg-gray-50 overflow-hidden" dir="rtl">
+                            <!-- App Header -->
+                            <div class="pt-10 px-5 pb-4 bg-white shadow-sm z-10">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex gap-2 items-center">
+                                        <div class="h-9 w-9 bg-gradient-to-br from-primary to-pink-400 rounded-xl flex items-center justify-center text-white text-sm">
+                                            <i class="fa-solid fa-capsules"></i>
+                                        </div>
+                                        <span class="font-bold text-gray-800">Pharmy</span>
+                                    </div>
+                                    <div class="flex gap-3">
+                                        <i class="fa-solid fa-bell text-gray-300"></i>
+                                        <i class="fa-solid fa-bars text-gray-400"></i>
+                                    </div>
                                 </div>
-                                <div>
-                                    <h4 class="font-bold text-gray-800 text-sm">לה רוש פוזה 50+</h4>
-                                    <div class="flex items-center gap-2 mt-1">
-                                        <span class="text-xs bg-green-100 text-green-600 px-2 py-0.5 rounded-full font-bold">המחיר הכי זול</span>
+                                <div class="mt-4 relative">
+                                    <input disabled placeholder="חיפוש מוצר או סריקת ברקוד..." class="w-full bg-gray-100 rounded-xl py-2.5 px-10 text-sm border-0">
+                                    <i class="fa-solid fa-search absolute right-3 top-3 text-gray-400 text-xs"></i>
+                                    <i class="fa-solid fa-barcode absolute left-3 top-3 text-primary text-xs"></i>
+                                </div>
+                            </div>
+
+                            <!-- App Content -->
+                            <div class="p-5 space-y-4 overflow-auto flex-1">
+                                <!-- Product Card -->
+                                <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+                                    <div class="flex gap-4">
+                                        <div class="w-16 h-16 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl flex items-center justify-center">
+                                            <i class="fa-solid fa-pump-soap text-blue-400 text-xl"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="font-bold text-gray-800 text-sm">לה רוש פוזה קרם לחות</h4>
+                                            <p class="text-xs text-gray-400 mt-0.5">La Roche-Posay 50ml</p>
+                                            <div class="flex items-center gap-2 mt-2">
+                                                <span class="text-xs bg-green-100 text-green-600 px-2 py-0.5 rounded-full font-bold">חוסכים ₪45</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Price Comparison Mini -->
+                                    <div class="mt-4 pt-4 border-t border-gray-50 space-y-2">
+                                        <div class="flex justify-between items-center text-sm">
+                                            <span class="text-gray-400">סופר-פארם</span>
+                                            <span class="text-gray-400 line-through">₪134.90</span>
+                                        </div>
+                                        <div class="flex justify-between items-center text-sm bg-green-50 -mx-2 px-2 py-1.5 rounded-lg">
+                                            <span class="font-bold text-green-700">Be Pharm</span>
+                                            <span class="font-bold text-green-700">₪89.90</span>
+                                        </div>
+                                        <div class="flex justify-between items-center text-sm">
+                                            <span class="text-gray-400">Good Pharm</span>
+                                            <span class="text-gray-400">₪119.00</span>
+                                        </div>
+                                    </div>
+
+                                    <button class="w-full mt-4 bg-dark text-white py-2.5 rounded-xl text-sm font-bold hover:bg-dark-light transition">
+                                        נווט לסניף הקרוב
+                                    </button>
+                                </div>
+
+                                <!-- Second card hint -->
+                                <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 opacity-60">
+                                    <div class="flex gap-4">
+                                        <div class="w-16 h-16 bg-gradient-to-br from-pink-50 to-pink-100 rounded-xl flex items-center justify-center">
+                                            <i class="fa-solid fa-spray-can-sparkles text-pink-400 text-xl"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="font-bold text-gray-800 text-sm">וישי דאודורנט 48H</h4>
+                                            <p class="text-xs text-gray-400 mt-0.5">Vichy 50ml</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="mt-4 pt-4 border-t border-gray-50 flex justify-between items-end">
-                                <div>
-                                    <p class="text-xs text-gray-400">נמצא ב- <span class="font-bold text-gray-600">Be Pharm</span></p>
-                                    <p class="text-lg font-extrabold text-primary">₪89.90</p>
-                                </div>
-                                <button class="bg-dark text-white px-4 py-2 rounded-lg text-xs font-bold">נווט לסניף</button>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div id="features" class="py-20 bg-white relative z-10">
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce hidden md:block">
+            <i class="fa-solid fa-chevron-down text-gray-300 text-xl"></i>
+        </div>
+    </section>
+
+    <!-- Social Proof Bar -->
+    <section class="py-8 bg-white border-y border-gray-100 relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-base text-primary font-bold tracking-wide uppercase" data-key="whyTitle">למה Pharmy?</h2>
-                <p class="mt-2 text-3xl leading-8 font-extrabold text-gray-900 sm:text-4xl" data-key="whySubtitle">
-                    אלגוריתם המחירים האישי שלך
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 gap-8 sm:grid-cols-3">
-                <div class="text-center p-6 border border-gray-50 rounded-2xl hover:shadow-lg transition">
-                    <div class="w-16 h-16 bg-pink-50 rounded-2xl flex items-center justify-center text-primary mx-auto mb-4 text-2xl">
-                        <i class="fa-solid fa-barcode"></i>
+            <div class="flex flex-wrap justify-center gap-8 sm:gap-16 text-center">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center">
+                        <i class="fa-solid fa-store text-primary text-lg"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-gray-900" data-key="feat1Title">סריקת ברקוד מהירה</h3>
-                    <p class="mt-2 text-gray-500 text-sm" data-key="feat1Desc">נמצאים מול המדף? סרקו את המוצר וגלו מיד אם הוא זול יותר מעבר לכביש.</p>
+                    <div class="text-right rtl:text-right ltr:text-left">
+                        <div class="text-xl font-black text-dark">20+</div>
+                        <div class="text-xs text-gray-400" data-key="proofRetailers">רשתות נתמכות</div>
+                    </div>
                 </div>
-
-                <div class="text-center p-6 border border-gray-50 rounded-2xl hover:shadow-lg transition">
-                    <div class="w-16 h-16 bg-green-50 rounded-2xl flex items-center justify-center text-green-500 mx-auto mb-4 text-2xl">
-                        <i class="fa-solid fa-chart-line"></i>
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-secondary/10 rounded-2xl flex items-center justify-center">
+                        <i class="fa-solid fa-tags text-secondary text-lg"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-gray-900" data-key="feat2Title">היסטוריית מחירים</h3>
-                    <p class="mt-2 text-gray-500 text-sm" data-key="feat2Desc">אנחנו עוקבים אחרי מגמות כדי שתדעו אם ה"מבצע" הוא אמיתי או סתם טריק שיווקי.</p>
+                    <div class="text-right rtl:text-right ltr:text-left">
+                        <div class="text-xl font-black text-dark">100,000+</div>
+                        <div class="text-xs text-gray-400" data-key="proofPrices">מחירים במעקב</div>
+                    </div>
                 </div>
-
-                <div class="text-center p-6 border border-gray-50 rounded-2xl hover:shadow-lg transition">
-                    <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-500 mx-auto mb-4 text-2xl">
-                        <i class="fa-solid fa-robot"></i>
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-accent/10 rounded-2xl flex items-center justify-center">
+                        <i class="fa-solid fa-sync text-accent text-lg"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-gray-900" data-key="feat3Title">חלופות חכמות</h3>
-                    <p class="mt-2 text-gray-500 text-sm" data-key="feat3Desc">המערכת תמליץ על מוצרים גנריים עם אותם רכיבים פעילים בחצי מחיר.</p>
+                    <div class="text-right rtl:text-right ltr:text-left">
+                        <div class="text-xl font-black text-dark" data-key="proofUpdateNum">יומי</div>
+                        <div class="text-xs text-gray-400" data-key="proofUpdate">עדכון מחירים</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center">
+                        <i class="fa-solid fa-hand-holding-dollar text-blue-400 text-lg"></i>
+                    </div>
+                    <div class="text-right rtl:text-right ltr:text-left">
+                        <div class="text-xl font-black text-dark">100%</div>
+                        <div class="text-xs text-gray-400" data-key="proofFree">חינם לגמרי</div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <footer class="bg-gray-50 border-t border-gray-100">
-        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
-            
-            <div class="mb-4 md:mb-0 text-center md:text-right">
-                <span class="font-bold text-gray-800 text-lg">Pharmy</span>
-                <p class="text-sm text-gray-400 mt-1" data-key="footerSlogan">קניות חכמות בישראל.</p>
+    <!-- How it Works -->
+    <section id="how-it-works" class="py-24 section-gradient relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <span class="text-primary font-bold text-sm tracking-wider uppercase" data-key="howLabel">פשוט וקל</span>
+                <h2 class="mt-3 text-3xl sm:text-4xl font-black text-dark" data-key="howTitle">
+                    איך זה עובד?
+                </h2>
+                <p class="mt-4 text-gray-500 text-lg" data-key="howSubtitle">
+                    שלושה צעדים פשוטים לחיסכון משמעותי
+                </p>
             </div>
 
-            <div class="flex gap-8 text-sm text-gray-500">
-                <a href="#" class="hover:text-primary" data-key="privacy">מדיניות פרטיות</a>
-                <a href="#" class="hover:text-primary" data-key="terms">תנאי שימוש</a>
-                <a href="mailto:support@pharmy.app" class="hover:text-primary" data-key="contact">צור קשר</a>
+            <div class="grid md:grid-cols-3 gap-8 relative">
+                <!-- Connector line (hidden on mobile) -->
+                <div class="step-line hidden md:block"></div>
+
+                <!-- Step 1 -->
+                <div class="text-center relative reveal" style="animation-delay: 0.1s">
+                    <div class="w-16 h-16 bg-gradient-to-br from-primary to-pink-400 rounded-2xl flex items-center justify-center text-white text-2xl font-black mx-auto mb-6 shadow-lg relative z-10">
+                        1
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                        <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fa-solid fa-barcode text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-dark mb-2" data-key="step1Title">סורקים</h3>
+                        <p class="text-gray-500 text-sm" data-key="step1Desc">פותחים את האפליקציה וסורקים את הברקוד של המוצר</p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="text-center relative reveal" style="animation-delay: 0.2s">
+                    <div class="w-16 h-16 bg-gradient-to-br from-secondary to-green-400 rounded-2xl flex items-center justify-center text-white text-2xl font-black mx-auto mb-6 shadow-lg relative z-10">
+                        2
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                        <div class="w-14 h-14 bg-secondary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fa-solid fa-magnifying-glass-chart text-secondary text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-dark mb-2" data-key="step2Title">משווים</h3>
+                        <p class="text-gray-500 text-sm" data-key="step2Desc">רואים מיד את המחיר בכל 20+ הרשתות</p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="text-center relative reveal" style="animation-delay: 0.3s">
+                    <div class="w-16 h-16 bg-gradient-to-br from-accent to-yellow-400 rounded-2xl flex items-center justify-center text-dark text-2xl font-black mx-auto mb-6 shadow-lg relative z-10">
+                        3
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                        <div class="w-14 h-14 bg-accent/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fa-solid fa-piggy-bank text-accent text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-dark mb-2" data-key="step3Title">חוסכים</h3>
+                        <p class="text-gray-500 text-sm" data-key="step3Desc">ניווט לסניף הזול ביותר וחיסכון של עד 50%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <span class="text-primary font-bold text-sm tracking-wider uppercase" data-key="featLabel">יתרונות</span>
+                <h2 class="mt-3 text-3xl sm:text-4xl font-black text-dark" data-key="featTitle">
+                    למה Pharmy?
+                </h2>
+                <p class="mt-4 text-gray-500 text-lg" data-key="featSubtitle">
+                    לא סתם עוד אפליקציית מחירים
+                </p>
             </div>
 
-            <div class="flex gap-6 mt-4 md:mt-0">
-                <a href="#" class="text-gray-400 hover:text-primary transition"><i class="fa-brands fa-linkedin text-xl"></i></a>
-                <a href="#" class="text-gray-400 hover:text-primary transition"><i class="fa-brands fa-twitter text-xl"></i></a>
+            <!-- Hero Feature -->
+            <div class="bg-gradient-to-br from-primary/5 to-secondary/5 rounded-3xl p-8 md:p-12 mb-12 reveal">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-full text-primary font-bold text-sm mb-4">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            <span data-key="heroFeatBadge">טכנולוגיה חכמה</span>
+                        </div>
+                        <h3 class="text-2xl md:text-3xl font-black text-dark mb-4" data-key="heroFeatTitle">
+                            קניה חכמה - חלוקה אופטימלית
+                        </h3>
+                        <p class="text-gray-500 mb-6" data-key="heroFeatDesc">
+                            האלגוריתם שלנו מנתח את כל העגלה ומציע לכם איפה לקנות כל מוצר כדי לחסוך הכי הרבה. גם אם זה אומר לפצל בין שתי חנויות.
+                        </p>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-3 py-1.5 bg-white rounded-lg text-sm font-medium text-gray-600 shadow-sm" data-key="heroFeatTag1">עגלת קניות חכמה</span>
+                            <span class="px-3 py-1.5 bg-white rounded-lg text-sm font-medium text-gray-600 shadow-sm" data-key="heroFeatTag2">חלוקה בין חנויות</span>
+                            <span class="px-3 py-1.5 bg-white rounded-lg text-sm font-medium text-gray-600 shadow-sm" data-key="heroFeatTag3">חיסכון מקסימלי</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-center">
+                        <div class="bg-white rounded-2xl p-6 shadow-lg max-w-sm w-full">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="font-bold text-dark" data-key="heroFeatCartTitle">סיכום עגלה</span>
+                                <span class="text-sm text-gray-400">3 מוצרים</span>
+                            </div>
+                            <div class="space-y-3 mb-4">
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-500" data-key="heroFeatStore1">Be Pharm (2 מוצרים)</span>
+                                    <span class="font-bold">₪89</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-500" data-key="heroFeatStore2">Good Pharm (1 מוצר)</span>
+                                    <span class="font-bold">₪35</span>
+                                </div>
+                            </div>
+                            <div class="border-t pt-4">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400" data-key="heroFeatTotal">סה״כ</span>
+                                    <div class="text-right">
+                                        <span class="text-gray-400 line-through text-sm">₪178</span>
+                                        <span class="font-black text-xl text-secondary mr-2">₪124</span>
+                                    </div>
+                                </div>
+                                <div class="text-left mt-1">
+                                    <span class="text-sm font-bold text-secondary" data-key="heroFeatSaved">חסכתם ₪54!</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Grid -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Feature 1 -->
+                <div class="feature-card bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:border-primary/20 reveal">
+                    <div class="w-14 h-14 bg-pink-50 rounded-2xl flex items-center justify-center mb-4">
+                        <i class="fa-solid fa-barcode text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-dark mb-2" data-key="feat1Title">סריקה מהירה</h3>
+                    <p class="text-gray-500 text-sm" data-key="feat1Desc">סריקת ברקוד בשנייה אחת. תוצאות מיידיות מכל הרשתות.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-card bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:border-secondary/20 reveal">
+                    <div class="w-14 h-14 bg-green-50 rounded-2xl flex items-center justify-center mb-4">
+                        <i class="fa-solid fa-chart-line text-secondary text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-dark mb-2" data-key="feat2Title">היסטוריית מחירים</h3>
+                    <p class="text-gray-500 text-sm" data-key="feat2Desc">עקבו אחרי מגמות. דעו אם ה"מבצע" באמת משתלם.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:border-blue-200 reveal">
+                    <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-4">
+                        <i class="fa-solid fa-pills text-blue-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-dark mb-2" data-key="feat3Title">חלופות גנריות</h3>
+                    <p class="text-gray-500 text-sm" data-key="feat3Desc">המלצות על מוצרים זהים בחצי מחיר עם אותם רכיבים פעילים.</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="feature-card bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:border-accent/20 reveal">
+                    <div class="w-14 h-14 bg-amber-50 rounded-2xl flex items-center justify-center mb-4">
+                        <i class="fa-solid fa-bell text-accent text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-dark mb-2" data-key="feat4Title">התראות ירידת מחיר</h3>
+                    <p class="text-gray-500 text-sm" data-key="feat4Desc">שמרו מוצרים במועדפים וקבלו התראה כשהמחיר יורד.</p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="feature-card bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:border-purple-200 reveal">
+                    <div class="w-14 h-14 bg-purple-50 rounded-2xl flex items-center justify-center mb-4">
+                        <i class="fa-solid fa-location-dot text-purple-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-dark mb-2" data-key="feat5Title">סניפים קרובים</h3>
+                    <p class="text-gray-500 text-sm" data-key="feat5Desc">מצאו את הסניף הקרוב אליכם עם המחיר הזול ביותר.</p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="feature-card bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:border-rose-200 reveal">
+                    <div class="w-14 h-14 bg-rose-50 rounded-2xl flex items-center justify-center mb-4">
+                        <i class="fa-solid fa-lock text-rose-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-dark mb-2" data-key="feat6Title">פרטיות מלאה</h3>
+                    <p class="text-gray-500 text-sm" data-key="feat6Desc">ללא הרשמה, ללא מעקב. הנתונים שלכם נשארים אצלכם.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Retailers Section -->
+    <section id="retailers" class="py-24 section-gradient">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <span class="text-primary font-bold text-sm tracking-wider uppercase" data-key="retailLabel">כיסוי מלא</span>
+                <h2 class="mt-3 text-3xl sm:text-4xl font-black text-dark" data-key="retailTitle">
+                    כל הרשתות במקום אחד
+                </h2>
+                <p class="mt-4 text-gray-500 text-lg" data-key="retailSubtitle">
+                    משווים מחירים בין 20+ רשתות פארם וסופרמרקטים
+                </p>
+            </div>
+
+            <!-- Retailer Categories -->
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <!-- Pharmacies -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 reveal">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
+                            <i class="fa-solid fa-prescription-bottle-medical text-primary"></i>
+                        </div>
+                        <h3 class="font-bold text-dark text-lg" data-key="retailPharm">רשתות פארם</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 bg-gray-50 rounded-xl text-sm font-medium text-gray-600">Super-Pharm</span>
+                        <span class="px-4 py-2 bg-gray-50 rounded-xl text-sm font-medium text-gray-600">Be Pharm</span>
+                        <span class="px-4 py-2 bg-gray-50 rounded-xl text-sm font-medium text-gray-600">Good Pharm</span>
+                        <span class="px-4 py-2 bg-gray-50 rounded-xl text-sm font-medium text-gray-600">LifeCare</span>
+                        <span class="px-4 py-2 bg-gray-50 rounded-xl text-sm font-medium text-gray-600">Care</span>
+                    </div>
+                </div>
+
+                <!-- Supermarkets -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 reveal">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 bg-secondary/10 rounded-xl flex items-center justify-center">
+                            <i class="fa-solid fa-cart-shopping text-secondary"></i>
+                        </div>
+                        <h3 class="font-bold text-dark text-lg" data-key="retailSuper">רשתות קמעונאיות</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 bg-gray-50 rounded-xl text-sm font-medium text-gray-600">שופרסל</span>
+                        <span class="px-4 py-2 bg-gray-50 rounded-xl text-sm font-medium text-gray-600">רמי לוי</span>
+                        <span class="px-4 py-2 bg-gray-50 rounded-xl text-sm font-medium text-gray-600">ויקטורי</span>
+                        <span class="px-4 py-2 bg-gray-50 rounded-xl text-sm font-medium text-gray-600">יוחננוף</span>
+                        <span class="px-4 py-2 bg-gray-50 rounded-xl text-sm font-medium text-gray-600">חצי חינם</span>
+                        <span class="px-4 py-2 bg-gray-50 rounded-xl text-sm font-medium text-gray-600">טיב טעם</span>
+                        <span class="px-4 py-2 bg-primary/10 rounded-xl text-sm font-bold text-primary" data-key="retailMore">+10 נוספות</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coverage Stats -->
+            <div class="bg-gradient-to-r from-dark to-dark-light rounded-2xl p-8 text-white text-center reveal">
+                <p class="text-white/70 mb-2" data-key="coverageLabel">כיסוי ארצי</p>
+                <p class="text-2xl font-bold" data-key="coverageText">
+                    אלפי סניפים בכל רחבי הארץ - מאילת ועד קריית שמונה
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="py-24 bg-white relative overflow-hidden">
+        <!-- Background decoration -->
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 reveal">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-dark mb-6" data-key="ctaTitle">
+                מתחילים לחסוך היום
+            </h2>
+            <p class="text-xl text-gray-500 mb-10 max-w-2xl mx-auto" data-key="ctaSubtitle">
+                הורידו את Pharmy בחינם והתחילו לחסוך בקניה הבאה
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+                <a href="#" class="cta-glow flex items-center justify-center px-10 py-5 text-lg font-bold rounded-2xl text-white bg-dark hover:bg-dark-light shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1 animate-glow">
+                    <i class="fa-brands fa-apple text-3xl ml-4 rtl:ml-4 ltr:mr-4"></i>
+                    <div class="text-right rtl:text-right ltr:text-left">
+                        <div class="text-sm opacity-80" data-key="appleSub">הורידו מ-</div>
+                        <div class="text-xl font-bold">App Store</div>
+                    </div>
+                </a>
+
+                <a href="#" class="flex items-center justify-center px-10 py-5 text-lg font-bold rounded-2xl text-dark bg-white border-2 border-gray-200 hover:border-primary/30 shadow-lg hover:shadow-xl transition transform hover:-translate-y-1">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Play_Arrow_logo.svg" class="w-8 h-8 ml-4 rtl:ml-4 ltr:mr-4" alt="Google Play">
+                    <div class="text-right rtl:text-right ltr:text-left">
+                        <div class="text-sm text-gray-400" data-key="googleSub">זמין ב-</div>
+                        <div class="text-xl font-bold">Google Play</div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Final trust badges -->
+            <div class="flex flex-wrap justify-center gap-6 text-sm text-gray-400">
+                <span class="flex items-center gap-2">
+                    <i class="fa-solid fa-check-circle text-secondary"></i>
+                    <span data-key="finalTrust1">חינם לגמרי</span>
+                </span>
+                <span class="flex items-center gap-2">
+                    <i class="fa-solid fa-check-circle text-secondary"></i>
+                    <span data-key="finalTrust2">ללא הרשמה</span>
+                </span>
+                <span class="flex items-center gap-2">
+                    <i class="fa-solid fa-check-circle text-secondary"></i>
+                    <span data-key="finalTrust3">ללא פרסומות</span>
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white">
+        <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-12">
+                <!-- Brand -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="h-10 w-10 bg-gradient-to-br from-primary to-pink-400 rounded-xl flex items-center justify-center text-white">
+                            <i class="fa-solid fa-capsules"></i>
+                        </div>
+                        <span class="text-xl font-black">Pharmy</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-6 max-w-sm" data-key="footerDesc">
+                        האפליקציה החכמה להשוואת מחירי פארם בישראל. חוסכים כסף בכל קנייה.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-primary transition">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-primary transition">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-primary transition">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Links -->
+                <div>
+                    <h4 class="font-bold mb-4" data-key="footerLinks">קישורים</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a href="#features" class="hover:text-primary transition" data-key="footerFeatures">תכונות</a></li>
+                        <li><a href="#how-it-works" class="hover:text-primary transition" data-key="footerHow">איך זה עובד</a></li>
+                        <li><a href="#retailers" class="hover:text-primary transition" data-key="footerRetailers">רשתות</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal -->
+                <div>
+                    <h4 class="font-bold mb-4" data-key="footerLegal">משפטי</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a href="/privacy" class="hover:text-primary transition" data-key="privacy">מדיניות פרטיות</a></li>
+                        <li><a href="/terms" class="hover:text-primary transition" data-key="terms">תנאי שימוש</a></li>
+                        <li><a href="mailto:support@pharmy.app" class="hover:text-primary transition" data-key="contact">צור קשר</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom bar -->
+            <div class="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm text-gray-500">
+                    © 2025 Pharmy. <span data-key="footerRights">כל הזכויות שמורות.</span>
+                </p>
+                <div class="flex items-center gap-2 text-sm text-gray-500">
+                    <span data-key="footerMade">נבנה באהבה בישראל</span>
+                    <span>🇮🇱</span>
+                </div>
             </div>
         </div>
     </footer>
 
     <script>
+        // Translations
         const translations = {
             he: {
-                features: "פיצ׳רים",
-                howItWorks: "איך זה עובד",
-                downloadBtn: "הורדה",
-                badge: '<i class="fa-solid fa-check-circle mr-1"></i> השקה רשמית',
-                headlineMain: "די לשלם ביוקר",
-                headlineSub: "על הפארם שלכם",
-                description: "האפליקציה החכמה שמשווה בזמן אמת בין <strong>סופר-פארם</strong>, <strong>Be</strong>, ו-<strong>Good Pharm</strong>. סורקים את הברקוד וחוסכים 30-50% בכל קניה.",
-                appleSub: "הורידו ב",
-                googleSub: "זמין ב",
-                trust1: "ללא צורך בהרשמה",
-                trust2: "מחירים בזמן אמת",
-                trust3: "דירוג 5.0",
-                whyTitle: "למה Pharmy?",
-                whySubtitle: "אלגוריתם המחירים האישי שלך",
-                feat1Title: "סריקת ברקוד מהירה",
-                feat1Desc: "נמצאים מול המדף? סרקו את המוצר וגלו מיד אם הוא זול יותר מעבר לכביש.",
+                // Nav
+                navFeatures: "למה Pharmy",
+                navHow: "איך זה עובד",
+                navRetailers: "רשתות",
+                navDownload: "הורדה חינם",
+
+                // Hero
+                badge: "עדכון מחירים יומי",
+                headlineMain: "משווים מחירים.",
+                headlineSub: "חוסכים בגדול.",
+                description: "האפליקציה החכמה שסורקת ברקוד ומשווה מחירים בזמן אמת בין <strong class=\"text-gray-700\">20+ רשתות</strong> פארם וסופרים בישראל.",
+                statRetailers: "רשתות",
+                statPrices: "מחירים",
+                statSavings: "חיסכון",
+                appleSub: "הורידו מ-",
+                googleSub: "זמין ב-",
+                trust1: "ללא הרשמה",
+                trust2: "חינם לגמרי",
+                trust3: "מחירים בזמן אמת",
+                floatCheapest: "הכי זול!",
+
+                // Social Proof
+                proofRetailers: "רשתות נתמכות",
+                proofPrices: "מחירים במעקב",
+                proofUpdateNum: "יומי",
+                proofUpdate: "עדכון מחירים",
+                proofFree: "חינם לגמרי",
+
+                // How it works
+                howLabel: "פשוט וקל",
+                howTitle: "איך זה עובד?",
+                howSubtitle: "שלושה צעדים פשוטים לחיסכון משמעותי",
+                step1Title: "סורקים",
+                step1Desc: "פותחים את האפליקציה וסורקים את הברקוד של המוצר",
+                step2Title: "משווים",
+                step2Desc: "רואים מיד את המחיר בכל 20+ הרשתות",
+                step3Title: "חוסכים",
+                step3Desc: "ניווט לסניף הזול ביותר וחיסכון של עד 50%",
+
+                // Features
+                featLabel: "יתרונות",
+                featTitle: "למה Pharmy?",
+                featSubtitle: "לא סתם עוד אפליקציית מחירים",
+                heroFeatBadge: "טכנולוגיה חכמה",
+                heroFeatTitle: "קניה חכמה - חלוקה אופטימלית",
+                heroFeatDesc: "האלגוריתם שלנו מנתח את כל העגלה ומציע לכם איפה לקנות כל מוצר כדי לחסוך הכי הרבה. גם אם זה אומר לפצל בין שתי חנויות.",
+                heroFeatTag1: "עגלת קניות חכמה",
+                heroFeatTag2: "חלוקה בין חנויות",
+                heroFeatTag3: "חיסכון מקסימלי",
+                heroFeatCartTitle: "סיכום עגלה",
+                heroFeatStore1: "Be Pharm (2 מוצרים)",
+                heroFeatStore2: "Good Pharm (1 מוצר)",
+                heroFeatTotal: "סה״כ",
+                heroFeatSaved: "חסכתם ₪54!",
+                feat1Title: "סריקה מהירה",
+                feat1Desc: "סריקת ברקוד בשנייה אחת. תוצאות מיידיות מכל הרשתות.",
                 feat2Title: "היסטוריית מחירים",
-                feat2Desc: "אנחנו עוקבים אחרי מגמות כדי שתדעו אם ה'מבצע' הוא אמיתי או סתם טריק שיווקי.",
-                feat3Title: "חלופות חכמות",
-                feat3Desc: "המערכת תמליץ על מוצרים גנריים עם אותם רכיבים פעילים בחצי מחיר.",
-                footerSlogan: "קניות חכמות בישראל.",
+                feat2Desc: "עקבו אחרי מגמות. דעו אם ה\"מבצע\" באמת משתלם.",
+                feat3Title: "חלופות גנריות",
+                feat3Desc: "המלצות על מוצרים זהים בחצי מחיר עם אותם רכיבים פעילים.",
+                feat4Title: "התראות ירידת מחיר",
+                feat4Desc: "שמרו מוצרים במועדפים וקבלו התראה כשהמחיר יורד.",
+                feat5Title: "סניפים קרובים",
+                feat5Desc: "מצאו את הסניף הקרוב אליכם עם המחיר הזול ביותר.",
+                feat6Title: "פרטיות מלאה",
+                feat6Desc: "ללא הרשמה, ללא מעקב. הנתונים שלכם נשארים אצלכם.",
+
+                // Retailers
+                retailLabel: "כיסוי מלא",
+                retailTitle: "כל הרשתות במקום אחד",
+                retailSubtitle: "משווים מחירים בין 20+ רשתות פארם וסופרמרקטים",
+                retailPharm: "רשתות פארם",
+                retailSuper: "רשתות קמעונאיות",
+                retailMore: "+10 נוספות",
+                coverageLabel: "כיסוי ארצי",
+                coverageText: "אלפי סניפים בכל רחבי הארץ - מאילת ועד קריית שמונה",
+
+                // CTA
+                ctaTitle: "מתחילים לחסוך היום",
+                ctaSubtitle: "הורידו את Pharmy בחינם והתחילו לחסוך בקניה הבאה",
+                finalTrust1: "חינם לגמרי",
+                finalTrust2: "ללא הרשמה",
+                finalTrust3: "ללא פרסומות",
+
+                // Footer
+                footerDesc: "האפליקציה החכמה להשוואת מחירי פארם בישראל. חוסכים כסף בכל קנייה.",
+                footerLinks: "קישורים",
+                footerFeatures: "תכונות",
+                footerHow: "איך זה עובד",
+                footerRetailers: "רשתות",
+                footerLegal: "משפטי",
                 privacy: "מדיניות פרטיות",
                 terms: "תנאי שימוש",
-                contact: "צור קשר"
+                contact: "צור קשר",
+                footerRights: "כל הזכויות שמורות.",
+                footerMade: "נבנה באהבה בישראל"
             },
             en: {
-                features: "Features",
-                howItWorks: "How it Works",
-                downloadBtn: "Download",
-                badge: '<i class="fa-solid fa-check-circle mr-1"></i> Official Launch',
-                headlineMain: "Never Overpay for",
-                headlineSub: "Meds & Beauty",
-                description: "The intelligent scanner that compares <strong>Super-Pharm</strong>, <strong>Be</strong>, and <strong>Good Pharm</strong> instantly. Scan any barcode and save 30-50% on every trip.",
-                appleSub: "Download on the",
+                // Nav
+                navFeatures: "Why Pharmy",
+                navHow: "How it Works",
+                navRetailers: "Retailers",
+                navDownload: "Free Download",
+
+                // Hero
+                badge: "Daily Price Updates",
+                headlineMain: "Compare Prices.",
+                headlineSub: "Save Big.",
+                description: "The smart app that scans barcodes and compares prices in real-time across <strong class=\"text-gray-700\">20+ retailers</strong> - pharmacies and supermarkets in Israel.",
+                statRetailers: "Retailers",
+                statPrices: "Prices",
+                statSavings: "Savings",
+                appleSub: "Download on",
                 googleSub: "Get it on",
-                trust1: "No Registration Needed",
-                trust2: "Live Prices",
-                trust3: "5.0 Rating",
-                whyTitle: "Why Pharmy?",
-                whySubtitle: "Your Personal Pricing Algorithm",
-                feat1Title: "Instant Barcode Scan",
-                feat1Desc: "Standing in the aisle? Scan the product and we'll tell you if it's cheaper across the street.",
+                trust1: "No Registration",
+                trust2: "Completely Free",
+                trust3: "Real-time Prices",
+                floatCheapest: "Best Price!",
+
+                // Social Proof
+                proofRetailers: "Supported Retailers",
+                proofPrices: "Prices Tracked",
+                proofUpdateNum: "Daily",
+                proofUpdate: "Price Updates",
+                proofFree: "Completely Free",
+
+                // How it works
+                howLabel: "Simple & Easy",
+                howTitle: "How Does It Work?",
+                howSubtitle: "Three simple steps to significant savings",
+                step1Title: "Scan",
+                step1Desc: "Open the app and scan the product barcode",
+                step2Title: "Compare",
+                step2Desc: "Instantly see prices from all 20+ retailers",
+                step3Title: "Save",
+                step3Desc: "Navigate to the cheapest store and save up to 50%",
+
+                // Features
+                featLabel: "Benefits",
+                featTitle: "Why Pharmy?",
+                featSubtitle: "Not just another price comparison app",
+                heroFeatBadge: "Smart Technology",
+                heroFeatTitle: "Smart Shopping - Optimal Split",
+                heroFeatDesc: "Our algorithm analyzes your entire cart and suggests where to buy each product to maximize savings. Even if it means splitting between two stores.",
+                heroFeatTag1: "Smart Cart",
+                heroFeatTag2: "Store Split",
+                heroFeatTag3: "Maximum Savings",
+                heroFeatCartTitle: "Cart Summary",
+                heroFeatStore1: "Be Pharm (2 items)",
+                heroFeatStore2: "Good Pharm (1 item)",
+                heroFeatTotal: "Total",
+                heroFeatSaved: "You saved ₪54!",
+                feat1Title: "Fast Scanning",
+                feat1Desc: "Scan a barcode in one second. Instant results from all retailers.",
                 feat2Title: "Price History",
-                feat2Desc: "We track price trends so you know if that 'Sale' is actually a good deal or a marketing trick.",
-                feat3Title: "Smart Alternatives",
-                feat3Desc: "We suggest generic equivalents with the exact same active ingredients for half the price.",
-                footerSlogan: "Smart shopping for Israel.",
+                feat2Desc: "Track trends. Know if that \"sale\" is actually worth it.",
+                feat3Title: "Generic Alternatives",
+                feat3Desc: "Recommendations for identical products at half the price with the same active ingredients.",
+                feat4Title: "Price Drop Alerts",
+                feat4Desc: "Save products to favorites and get notified when the price drops.",
+                feat5Title: "Nearby Stores",
+                feat5Desc: "Find the nearest store with the lowest price.",
+                feat6Title: "Full Privacy",
+                feat6Desc: "No registration, no tracking. Your data stays with you.",
+
+                // Retailers
+                retailLabel: "Full Coverage",
+                retailTitle: "All Retailers in One Place",
+                retailSubtitle: "Compare prices across 20+ pharmacies and supermarkets",
+                retailPharm: "Pharmacy Chains",
+                retailSuper: "Retail Chains",
+                retailMore: "+10 more",
+                coverageLabel: "Nationwide Coverage",
+                coverageText: "Thousands of stores across Israel - from Eilat to Kiryat Shmona",
+
+                // CTA
+                ctaTitle: "Start Saving Today",
+                ctaSubtitle: "Download Pharmy for free and start saving on your next purchase",
+                finalTrust1: "Completely Free",
+                finalTrust2: "No Registration",
+                finalTrust3: "No Ads",
+
+                // Footer
+                footerDesc: "The smart app for comparing pharmacy prices in Israel. Save money on every purchase.",
+                footerLinks: "Links",
+                footerFeatures: "Features",
+                footerHow: "How it Works",
+                footerRetailers: "Retailers",
+                footerLegal: "Legal",
                 privacy: "Privacy Policy",
                 terms: "Terms of Service",
-                contact: "Contact"
+                contact: "Contact",
+                footerRights: "All rights reserved.",
+                footerMade: "Made with love in Israel"
             }
         };
 
@@ -316,36 +1075,24 @@
 
         function toggleLanguage() {
             currentLang = currentLang === 'he' ? 'en' : 'he';
-            
-            // 1. Update HTML tag direction and lang
+
+            // Update HTML direction
             document.documentElement.lang = currentLang;
             document.documentElement.dir = currentLang === 'he' ? 'rtl' : 'ltr';
             document.body.setAttribute('lang', currentLang);
 
-            // 2. Update Button Text
+            // Update language button
             const icon = document.getElementById('lang-icon');
             const text = document.getElementById('lang-text');
             if (currentLang === 'he') {
                 icon.innerText = "🇺🇸";
                 text.innerText = "English";
-                // Flip phone back
-                document.querySelector('.iphone-mockup').classList.remove('rotate-[-2deg]');
-                document.querySelector('.iphone-mockup').classList.add('rotate-[2deg]');
-                
-                // Flip absolute positioning classes
-                const mockupContainer = document.querySelector('.lg\\:absolute');
-                mockupContainer.classList.remove('ltr:right-0', 'ltr:left-auto');
-                mockupContainer.classList.add('rtl:left-0', 'rtl:right-auto');
-
             } else {
                 icon.innerText = "🇮🇱";
                 text.innerText = "עברית";
-                // Flip phone angle for fun
-                document.querySelector('.iphone-mockup').classList.remove('rotate-[2deg]');
-                document.querySelector('.iphone-mockup').classList.add('rotate-[-2deg]');
             }
 
-            // 3. Update Text Content
+            // Update all translated elements
             document.querySelectorAll('[data-key]').forEach(el => {
                 const key = el.getAttribute('data-key');
                 if (translations[currentLang][key]) {
@@ -353,6 +1100,48 @@
                 }
             });
         }
+
+        // Scroll reveal animation
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            const windowHeight = window.innerHeight;
+
+            reveals.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                const elementVisible = 150;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    el.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', reveal);
+        reveal(); // Initial check
+
+        // Navbar background on scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('glass', 'border-b', 'border-gray-100', 'shadow-sm');
+            } else {
+                navbar.classList.remove('glass', 'border-b', 'border-gray-100', 'shadow-sm');
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
     </script>
 </body>
 </html>
