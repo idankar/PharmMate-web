@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מדיניות פרטיות - Pharmy</title>
+    <meta name="description" content="מדיניות הפרטיות של אפליקציית Pharmy - השוואת מחירי פארם בישראל">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#EFA7B0',
+                        'primary-dark': '#E8919C',
+                        secondary: '#9CD3B9',
+                        dark: '#1A1A2E',
+                        'dark-light': '#2D3748',
+                    },
+                    fontFamily: {
+                        sans: ['Heebo', 'Nunito', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Heebo', sans-serif; }
+        body[lang="en"] { font-family: 'Nunito', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-700 min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="/" class="flex items-center gap-3">
+                    <img src="app-icon.png" alt="Pharmy" class="h-9 w-9">
+                    <span class="text-xl font-bold text-dark">Pharmy</span>
+                </a>
+                <a href="/" class="text-gray-500 hover:text-primary transition text-sm font-medium">
+                    <i class="fa-solid fa-arrow-right ml-2"></i>
+                    חזרה לדף הבית
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-12">
+
+            <!-- Header -->
+            <div class="text-center mb-10 pb-8 border-b border-gray-100">
+                <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <i class="fa-solid fa-shield-halved text-primary text-2xl"></i>
+                </div>
+                <h1 class="text-3xl font-bold text-dark mb-2">מדיניות פרטיות</h1>
+                <p class="text-gray-400 text-sm">עודכן לאחרונה: 8 באוקטובר 2025</p>
+            </div>
+
+            <!-- Content Sections -->
+            <div class="prose prose-gray max-w-none space-y-8">
+
+                <section>
+                    <h2 class="text-xl font-bold text-dark mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-secondary/10 rounded-lg flex items-center justify-center text-secondary text-sm">1</span>
+                        סקירה כללית
+                    </h2>
+                    <p class="text-gray-600 leading-relaxed">
+                        Pharmy היא אפליקציית השוואת מחירים לתחום הפארם והקוסמטיקה בישראל. מדיניות זו מפרטת כיצד אנו אוספים, משתמשים ומגנים על המידע שלכם.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-bold text-dark mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-secondary/10 rounded-lg flex items-center justify-center text-secondary text-sm">2</span>
+                        מידע שאנו אוספים
+                    </h2>
+                    <div class="space-y-4">
+                        <div class="bg-gray-50 rounded-xl p-4">
+                            <h3 class="font-semibold text-dark mb-2">מידע שאתם מספקים</h3>
+                            <p class="text-gray-600 text-sm">שמות, כתובות דוא"ל, שמות משתמש וסיסמאות בעת הרשמה לחשבון.</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-xl p-4">
+                            <h3 class="font-semibold text-dark mb-2">מידע מיקום</h3>
+                            <p class="text-gray-600 text-sm">מעקב GPS ומיקום מבוסס מכשיר להצגת מחירים בחנויות קרובות.</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-xl p-4">
+                            <h3 class="font-semibold text-dark mb-2">הרשאות מכשיר</h3>
+                            <p class="text-gray-600 text-sm">גישה למצלמה לסריקת ברקודים.</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-xl p-4">
+                            <h3 class="font-semibold text-dark mb-2">מידע על המכשיר</h3>
+                            <p class="text-gray-600 text-sm">מזהה מכשיר, מערכת הפעלה, כתובת IP ופרטי חומרה.</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-xl p-4">
+                            <h3 class="font-semibold text-dark mb-2">אנליטיקס</h3>
+                            <p class="text-gray-600 text-sm">לחיצות על כפתורים וצפיות במסכים באמצעות Mixpanel.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-bold text-dark mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-secondary/10 rounded-lg flex items-center justify-center text-secondary text-sm">3</span>
+                        מטרות העיבוד
+                    </h2>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-secondary mt-1"></i>
+                            <span>יצירת חשבון ואימות משתמשים</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-secondary mt-1"></i>
+                            <span>מתן השירותים המבוקשים</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-secondary mt-1"></i>
+                            <span>שיפור והערכת האפליקציה</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-secondary mt-1"></i>
+                            <span>שמירה על אבטחה ומניעת הונאות</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-secondary mt-1"></i>
+                            <span>עמידה בדרישות חוקיות</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-bold text-dark mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-secondary/10 rounded-lg flex items-center justify-center text-secondary text-sm">4</span>
+                        שיתוף עם צדדים שלישיים
+                    </h2>
+                    <p class="text-gray-600 mb-4">אנו משתפים מידע עם הספקים הבאים:</p>
+                    <div class="grid sm:grid-cols-2 gap-3">
+                        <div class="flex items-center gap-3 bg-gray-50 rounded-lg p-3">
+                            <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center shadow-sm">
+                                <i class="fa-solid fa-robot text-gray-400 text-sm"></i>
+                            </div>
+                            <div>
+                                <div class="font-medium text-dark text-sm">OpenAI</div>
+                                <div class="text-xs text-gray-400">שירותי AI</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 bg-gray-50 rounded-lg p-3">
+                            <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center shadow-sm">
+                                <i class="fa-solid fa-cloud text-gray-400 text-sm"></i>
+                            </div>
+                            <div>
+                                <div class="font-medium text-dark text-sm">Render</div>
+                                <div class="text-xs text-gray-400">אחסון ענן</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 bg-gray-50 rounded-lg p-3">
+                            <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center shadow-sm">
+                                <i class="fa-solid fa-chart-line text-gray-400 text-sm"></i>
+                            </div>
+                            <div>
+                                <div class="font-medium text-dark text-sm">Mixpanel</div>
+                                <div class="text-xs text-gray-400">אנליטיקס</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 bg-gray-50 rounded-lg p-3">
+                            <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center shadow-sm">
+                                <i class="fa-solid fa-mobile-screen text-gray-400 text-sm"></i>
+                            </div>
+                            <div>
+                                <div class="font-medium text-dark text-sm">TestFlight & Google Play</div>
+                                <div class="text-xs text-gray-400">בדיקות</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-bold text-dark mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-secondary/10 rounded-lg flex items-center justify-center text-secondary text-sm">5</span>
+                        הזכויות שלכם
+                    </h2>
+                    <p class="text-gray-600 mb-4">
+                        באפשרותכם לבקש גישה, עדכון או מחיקה של המידע האישי שלכם. ניתן גם לבטל הרשאות מיקום דרך הגדרות המכשיר.
+                    </p>
+                </section>
+
+                <!-- Contact -->
+                <section class="bg-gradient-to-br from-primary/5 to-secondary/5 rounded-2xl p-6 mt-10">
+                    <h2 class="text-xl font-bold text-dark mb-4">יצירת קשר</h2>
+                    <p class="text-gray-600 mb-4">לשאלות בנוגע למדיניות הפרטיות או לבקשות הקשורות למידע שלכם:</p>
+                    <div class="space-y-3">
+                        <a href="mailto:pharmmate.app@gmail.com" class="flex items-center gap-3 text-dark hover:text-primary transition">
+                            <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm">
+                                <i class="fa-solid fa-envelope text-primary"></i>
+                            </div>
+                            <span class="font-medium">pharmmate.app@gmail.com</span>
+                        </a>
+                        <div class="flex items-center gap-3 text-gray-500">
+                            <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm">
+                                <i class="fa-solid fa-location-dot text-secondary"></i>
+                            </div>
+                            <span class="text-sm">משעול הדס 14, שדרות 8708313, ישראל</span>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-8 mt-12">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="flex items-center justify-center gap-3 mb-4">
+                <img src="app-icon.png" alt="Pharmy" class="h-8 w-8">
+                <span class="text-lg font-bold">Pharmy</span>
+            </div>
+            <p class="text-gray-400 text-sm">
+                © 2025 Pharmy. כל הזכויות שמורות.
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
