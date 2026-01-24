@@ -21,6 +21,37 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png">
 
+    <!-- Google Analytics 4 + Google Ads Conversion Tracking -->
+    <!-- REPLACE 'G-XXXXXXXXXX' with your GA4 Measurement ID -->
+    <!-- REPLACE 'AW-XXXXXXXXX' with your Google Ads ID (optional) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX'); // GA4
+        // gtag('config', 'AW-XXXXXXXXX'); // Uncomment and add Google Ads ID
+
+        // Track download button clicks as conversions
+        function trackDownload(store, location) {
+            // GA4 Event
+            gtag('event', 'download_click', {
+                'store': store,           // 'app_store' or 'google_play'
+                'button_location': location, // 'hero' or 'footer'
+                'page_url': window.location.href
+            });
+
+            // Google Ads Conversion (uncomment and configure)
+            // gtag('event', 'conversion', {
+            //     'send_to': 'AW-XXXXXXXXX/CONVERSION_LABEL',
+            //     'value': 1.0,
+            //     'currency': 'ILS'
+            // });
+
+            console.log('Conversion tracked:', store, location);
+        }
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -319,7 +350,7 @@
 
                     <!-- CTA Buttons -->
                     <div id="download" class="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-slide-up" style="animation-delay: 0.3s">
-                        <a href="https://apps.apple.com/il/app/pharmy/id6753762155" target="_blank" rel="noopener" class="cta-glow flex items-center justify-center px-8 py-4 text-base font-bold rounded-2xl text-white bg-dark hover:bg-dark-light shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1">
+                        <a href="https://apps.apple.com/il/app/pharmy/id6753762155" target="_blank" rel="noopener" onclick="trackDownload('app_store', 'hero')" class="cta-glow flex items-center justify-center px-8 py-4 text-base font-bold rounded-2xl text-white bg-dark hover:bg-dark-light shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1">
                             <i class="fa-brands fa-apple text-2xl ml-3 rtl:ml-3 ltr:mr-3"></i>
                             <div class="text-right rtl:text-right ltr:text-left">
                                 <div class="text-xs opacity-80 font-medium" data-key="appleSub">הורידו מ-</div>
@@ -327,7 +358,7 @@
                             </div>
                         </a>
 
-                        <a href="#" class="flex items-center justify-center px-8 py-4 text-base font-bold rounded-2xl text-dark bg-white border-2 border-gray-100 hover:border-primary/30 hover:bg-gray-50 shadow-lg hover:shadow-xl transition transform hover:-translate-y-1">
+                        <a href="#" onclick="trackDownload('google_play', 'hero')" class="flex items-center justify-center px-8 py-4 text-base font-bold rounded-2xl text-dark bg-white border-2 border-gray-100 hover:border-primary/30 hover:bg-gray-50 shadow-lg hover:shadow-xl transition transform hover:-translate-y-1">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Play_Arrow_logo.svg" class="w-6 h-6 ml-3 rtl:ml-3 ltr:mr-3" alt="Google Play">
                             <div class="text-right rtl:text-right ltr:text-left">
                                 <div class="text-xs text-gray-400 font-medium" data-key="googleSub">זמין ב-</div>
@@ -710,7 +741,7 @@
 
             <!-- CTA Buttons -->
             <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-                <a href="https://apps.apple.com/il/app/pharmy/id6753762155" target="_blank" rel="noopener" class="cta-glow flex items-center justify-center px-10 py-5 text-lg font-bold rounded-2xl text-white bg-dark hover:bg-dark-light shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1 animate-glow">
+                <a href="https://apps.apple.com/il/app/pharmy/id6753762155" target="_blank" rel="noopener" onclick="trackDownload('app_store', 'cta_section')" class="cta-glow flex items-center justify-center px-10 py-5 text-lg font-bold rounded-2xl text-white bg-dark hover:bg-dark-light shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1 animate-glow">
                     <i class="fa-brands fa-apple text-3xl ml-4 rtl:ml-4 ltr:mr-4"></i>
                     <div class="text-right rtl:text-right ltr:text-left">
                         <div class="text-sm opacity-80" data-key="appleSub">הורידו מ-</div>
@@ -718,7 +749,7 @@
                     </div>
                 </a>
 
-                <a href="#" class="flex items-center justify-center px-10 py-5 text-lg font-bold rounded-2xl text-dark bg-white border-2 border-gray-200 hover:border-primary/30 shadow-lg hover:shadow-xl transition transform hover:-translate-y-1">
+                <a href="#" onclick="trackDownload('google_play', 'cta_section')" class="flex items-center justify-center px-10 py-5 text-lg font-bold rounded-2xl text-dark bg-white border-2 border-gray-200 hover:border-primary/30 shadow-lg hover:shadow-xl transition transform hover:-translate-y-1">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Play_Arrow_logo.svg" class="w-8 h-8 ml-4 rtl:ml-4 ltr:mr-4" alt="Google Play">
                     <div class="text-right rtl:text-right ltr:text-left">
                         <div class="text-sm text-gray-400" data-key="googleSub">זמין ב-</div>
