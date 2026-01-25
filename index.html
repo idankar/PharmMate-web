@@ -17,9 +17,15 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Pharmy - השוואת מחירים חכמה">
     <meta name="twitter:description" content="סורקים ברקוד. משווים מחירים. קונים בחכמה.">
+    <meta name="twitter:image" content="https://www.pharmy.app/og-image.png">
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <!-- Apple Smart Banner - shows "Open in App Store" on iOS Safari -->
+    <meta name="apple-itunes-app" content="app-id=6753762155">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" sizes="192x192" href="/icon-192.png">
 
     <!-- Google Analytics 4 + Google Ads Conversion Tracking -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-1E4ZDXBPEH"></script>
@@ -378,6 +384,15 @@
                             <i class="fa-solid fa-ban text-gray-400"></i>
                             <span class="text-gray-500" data-key="trust3">ללא פרסומות</span>
                         </span>
+                    </div>
+
+                    <!-- QR Code - Desktop only -->
+                    <div class="hidden lg:flex items-center gap-4 mt-8 p-4 bg-white rounded-2xl shadow-sm border border-gray-100 animate-fade-in" style="animation-delay: 0.5s">
+                        <img src="qr-code.png" alt="QR Code" class="w-20 h-20 rounded-lg">
+                        <div class="text-right rtl:text-right ltr:text-left">
+                            <p class="text-sm font-semibold text-dark" data-key="qrTitle">סרקו להורדה</p>
+                            <p class="text-xs text-gray-400" data-key="qrSubtitle">פתחו את המצלמה וסרקו</p>
+                        </div>
                     </div>
                 </div>
 
@@ -851,6 +866,8 @@
                 trust1: "תוצאות בשניות",
                 trust2: "ללא הרשמה",
                 trust3: "ללא פרסומות",
+                qrTitle: "סרקו להורדה",
+                qrSubtitle: "פתחו את המצלמה וסרקו",
 
                 // Social Proof
                 proofRetailers: "רשתות נתמכות",
@@ -953,6 +970,8 @@
                 trust1: "Results in Seconds",
                 trust2: "No Registration",
                 trust3: "No Ads",
+                qrTitle: "Scan to Download",
+                qrSubtitle: "Open camera and scan",
 
                 // Social Proof
                 proofRetailers: "Supported Retailers",
