@@ -326,13 +326,13 @@
 
                     <!-- Headline -->
                     <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-dark leading-tight animate-slide-up">
-                        <span class="block" data-key="headlineMain">כל המחירים.</span>
-                        <span class="block text-transparent bg-clip-text bg-gradient-to-l from-primary to-pink-500" data-key="headlineSub">הבחירה בידיים שלך.</span>
+                        <span class="block" data-key="headlineMain">די לשלם ביוקר</span>
+                        <span class="block text-transparent bg-clip-text bg-gradient-to-l from-primary to-pink-500" data-key="headlineSub">על הפארם שלך.</span>
                     </h1>
 
                     <!-- Description -->
                     <p class="mt-6 text-lg sm:text-xl text-gray-500 max-w-xl mx-auto lg:mx-0 leading-relaxed animate-slide-up" style="animation-delay: 0.1s" data-key="description">
-                        האפליקציה החכמה שסורקת ברקוד ומשווה מחירים בזמן אמת בין <strong class="text-gray-700">20+ רשתות</strong> פארם וסופרים בישראל.
+                        האפליקציה היחידה שחוסכת לך <strong class="text-gray-700">עד 30%</strong> בכל קנייה ע״י פיצול חכם בין סופר-פארם, Be ורמי לוי.
                     </p>
 
                     <!-- Stats Bar -->
@@ -370,19 +370,31 @@
                         </a>
                     </div>
 
+                    <!-- 5-Star Social Proof -->
+                    <div class="mt-6 flex items-center justify-center lg:justify-start gap-3 animate-fade-in" style="animation-delay: 0.35s">
+                        <div class="flex text-amber-400">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <span class="text-sm font-semibold text-dark" data-key="socialProof">הצטרפו לחוסכים החכמים</span>
+                    </div>
+
                     <!-- Trust Badges -->
-                    <div class="mt-8 flex flex-wrap gap-4 justify-center lg:justify-start text-sm animate-fade-in" style="animation-delay: 0.4s">
+                    <div class="mt-6 flex flex-wrap gap-4 justify-center lg:justify-start text-sm animate-fade-in" style="animation-delay: 0.4s">
                         <span class="flex items-center gap-2 px-3 py-1.5 bg-white rounded-full shadow-sm border border-gray-100">
                             <i class="fa-solid fa-clock text-secondary"></i>
                             <span class="text-gray-500" data-key="trust1">תוצאות בשניות</span>
                         </span>
                         <span class="flex items-center gap-2 px-3 py-1.5 bg-white rounded-full shadow-sm border border-gray-100">
-                            <i class="fa-solid fa-user-shield text-primary"></i>
-                            <span class="text-gray-500" data-key="trust2">ללא הרשמה</span>
+                            <i class="fa-solid fa-shield-halved text-primary"></i>
+                            <span class="text-gray-500" data-key="trust2">פרטיות מובטחת</span>
                         </span>
                         <span class="flex items-center gap-2 px-3 py-1.5 bg-white rounded-full shadow-sm border border-gray-100">
-                            <i class="fa-solid fa-ban text-gray-400"></i>
-                            <span class="text-gray-500" data-key="trust3">ללא פרסומות</span>
+                            <span class="text-base">🇮🇱</span>
+                            <span class="text-gray-500" data-key="trust3">נבנה בישראל</span>
                         </span>
                     </div>
 
@@ -396,21 +408,63 @@
                     </div>
                 </div>
 
-                <!-- Phone Mockup with Real Screenshot -->
-                <div class="hidden lg:flex justify-center items-center relative">
+                <!-- Hero Visual: Smart Split Comparison -->
+                <div class="hidden lg:flex flex-col justify-center items-center relative">
                     <!-- Background glow -->
                     <div class="absolute w-[500px] h-[500px] bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full blur-3xl"></div>
 
-                    <!-- Phone Frame with Real Screenshot -->
-                    <div class="relative z-20 animate-float">
-                        <div class="iphone-mockup w-[300px] h-[620px] p-[3px]">
-                            <div class="iphone-notch"></div>
-                            <!-- Real App Screenshot -->
-                            <img
-                                src="app-screenshot.png"
-                                alt="Pharmy App Screenshot"
-                                class="w-full h-full object-cover object-top rounded-[2.5rem]"
-                            >
+                    <!-- Savings Comparison Card -->
+                    <div class="relative z-20 bg-white rounded-3xl shadow-2xl p-8 max-w-md animate-float">
+                        <!-- Header -->
+                        <div class="text-center mb-6">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 bg-secondary/10 rounded-full text-secondary font-semibold text-sm mb-3">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                                <span data-key="heroCartTitle">סל קניות לדוגמה</span>
+                            </div>
+                            <p class="text-xs text-gray-400" data-key="heroCartItems">5 מוצרים • קרם לחות, שמפו, ויטמינים...</p>
+                        </div>
+
+                        <!-- Price Comparison -->
+                        <div class="space-y-4">
+                            <!-- Without Pharmy -->
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-2xl">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-gray-200 rounded-xl flex items-center justify-center">
+                                        <i class="fa-solid fa-store text-gray-400"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-dark text-sm" data-key="heroWithout">בלי Pharmy</p>
+                                        <p class="text-xs text-gray-400" data-key="heroWithoutSub">חנות אחת רנדומלית</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-2xl font-black text-gray-400 line-through">₪287</p>
+                                </div>
+                            </div>
+
+                            <!-- With Pharmy -->
+                            <div class="flex items-center justify-between p-4 bg-secondary/10 rounded-2xl border-2 border-secondary">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-secondary rounded-xl flex items-center justify-center">
+                                        <i class="fa-solid fa-wand-magic-sparkles text-white"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-dark text-sm" data-key="heroWith">עם Pharmy</p>
+                                        <p class="text-xs text-gray-500" data-key="heroWithSub">פיצול חכם בין 2 חנויות</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-2xl font-black text-secondary">₪199</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Savings Badge -->
+                        <div class="mt-6 text-center">
+                            <div class="inline-flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-secondary to-green-400 rounded-full text-white font-bold shadow-lg">
+                                <i class="fa-solid fa-piggy-bank"></i>
+                                <span data-key="heroSavings">חסכת ₪88 בקנייה אחת!</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -854,9 +908,9 @@
 
                 // Hero
                 badge: "עדכון מחירים יומי",
-                headlineMain: "כל המחירים.",
-                headlineSub: "הבחירה בידיים שלך.",
-                description: "האפליקציה החכמה שסורקת ברקוד ומשווה מחירים בזמן אמת בין <strong class=\"text-gray-700\">20+ רשתות</strong> פארם וסופרים בישראל.",
+                headlineMain: "די לשלם ביוקר",
+                headlineSub: "על הפארם שלך.",
+                description: "האפליקציה היחידה שחוסכת לך <strong class=\"text-gray-700\">עד 30%</strong> בכל קנייה ע״י פיצול חכם בין סופר-פארם, Be ורמי לוי.",
                 statRetailers: "רשתות",
                 statPrices: "מוצרים",
                 statSavingsNum: "עשרות אחוזי",
@@ -864,10 +918,18 @@
                 appleSub: "הורידו מ-",
                 googleSub: "זמין ב-",
                 trust1: "תוצאות בשניות",
-                trust2: "ללא הרשמה",
-                trust3: "ללא פרסומות",
+                trust2: "פרטיות מובטחת",
+                trust3: "נבנה בישראל",
+                socialProof: "הצטרפו לחוסכים החכמים",
                 qrTitle: "סרקו להורדה",
                 qrSubtitle: "פתחו את המצלמה וסרקו",
+                heroCartTitle: "סל קניות לדוגמה",
+                heroCartItems: "5 מוצרים • קרם לחות, שמפו, ויטמינים...",
+                heroWithout: "בלי Pharmy",
+                heroWithoutSub: "חנות אחת רנדומלית",
+                heroWith: "עם Pharmy",
+                heroWithSub: "פיצול חכם בין 2 חנויות",
+                heroSavings: "חסכת ₪88 בקנייה אחת!",
 
                 // Social Proof
                 proofRetailers: "רשתות נתמכות",
@@ -958,9 +1020,9 @@
 
                 // Hero
                 badge: "Daily Price Updates",
-                headlineMain: "All Prices.",
-                headlineSub: "The Choice is Yours.",
-                description: "The smart app that scans barcodes and compares prices in real-time across <strong class=\"text-gray-700\">20+ retailers</strong> - pharmacies and supermarkets in Israel.",
+                headlineMain: "Stop Overpaying",
+                headlineSub: "For Your Pharmacy.",
+                description: "The only app that saves you <strong class=\"text-gray-700\">up to 30%</strong> on every purchase by smartly splitting between Super-Pharm, Be, and Rami Levy.",
                 statRetailers: "Retailers",
                 statPrices: "Products",
                 statSavingsNum: "Significant",
@@ -968,10 +1030,18 @@
                 appleSub: "Download on",
                 googleSub: "Get it on",
                 trust1: "Results in Seconds",
-                trust2: "No Registration",
-                trust3: "No Ads",
+                trust2: "Privacy Guaranteed",
+                trust3: "Made in Israel",
+                socialProof: "Join the Smart Savers",
                 qrTitle: "Scan to Download",
                 qrSubtitle: "Open camera and scan",
+                heroCartTitle: "Sample Shopping Cart",
+                heroCartItems: "5 items • Moisturizer, shampoo, vitamins...",
+                heroWithout: "Without Pharmy",
+                heroWithoutSub: "Random single store",
+                heroWith: "With Pharmy",
+                heroWithSub: "Smart split between 2 stores",
+                heroSavings: "You saved ₪88 in one purchase!",
 
                 // Social Proof
                 proofRetailers: "Supported Retailers",
