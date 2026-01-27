@@ -34,6 +34,7 @@
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'G-1E4ZDXBPEH'); // GA4
+        gtag('config', 'AW-17901784857'); // Google Ads
 
         // Track download button clicks as conversions
         function trackDownload(store, location) {
@@ -44,14 +45,10 @@
                 'page_url': window.location.href
             });
 
-            // Google Ads Conversion (uncomment and configure)
-            // gtag('event', 'conversion', {
-            //     'send_to': 'AW-XXXXXXXXX/CONVERSION_LABEL',
-            //     'value': 1.0,
-            //     'currency': 'ILS'
-            // });
-
-            console.log('Conversion tracked:', store, location);
+            // Google Ads Conversion
+            gtag('event', 'conversion', {
+                'send_to': 'AW-17901784857/PAGE_VIEW'
+            });
         }
     </script>
 
