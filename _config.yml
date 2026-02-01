@@ -1,0 +1,4 @@
+# GitHub Pages configuration
+# Include .well-known directory for deep linking files
+include:
+  - .well-known

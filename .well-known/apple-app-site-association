@@ -1,0 +1,14 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "D755Y4L87R.com.idankarbat.pharmmate",
+        "paths": ["*", "/", "/*"]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": ["D755Y4L87R.com.idankarbat.pharmmate"]
+  }
+}

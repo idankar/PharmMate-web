@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.idankarbat.pharmmate",
+      "sha256_cert_fingerprints": [
+        "8C:F9:34:C3:3B:BD:C8:D1:CD:53:0B:F5:18:DC:83:93:A6:3D:C5:03:8D:C7:5A:43:C4:8F:15:15:C6:C9:22:4A"
+      ]
+    }
+  }
+]
