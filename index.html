@@ -361,13 +361,13 @@
                             </div>
                         </a>
 
-                        <button onclick="showComingSoon()" class="flex items-center justify-center px-8 py-4 text-base font-bold rounded-2xl text-dark bg-white border-2 border-gray-100 hover:border-primary/30 hover:bg-gray-50 shadow-lg hover:shadow-xl transition transform hover:-translate-y-1 cursor-pointer">
+                        <a href="https://play.google.com/store/apps/details?id=com.idankarbat.pharmmate" target="_blank" rel="noopener" onclick="trackDownload('google_play', 'hero')" class="flex items-center justify-center px-8 py-4 text-base font-bold rounded-2xl text-dark bg-white border-2 border-gray-100 hover:border-primary/30 hover:bg-gray-50 shadow-lg hover:shadow-xl transition transform hover:-translate-y-1">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Play_Arrow_logo.svg" class="w-6 h-6 ml-3 rtl:ml-3 ltr:mr-3" alt="Google Play">
                             <div class="text-right rtl:text-right ltr:text-left">
-                                <div class="text-xs text-gray-400 font-medium" data-key="googleSub">זמין ב-</div>
+                                <div class="text-xs text-gray-400 font-medium" data-key="googleSub">הורידו מ-</div>
                                 <div class="text-lg font-bold leading-none">Google Play</div>
                             </div>
-                        </button>
+                        </a>
                     </div>
 
                     <!-- Trust Badges -->
@@ -803,13 +803,13 @@
                     </div>
                 </a>
 
-                <button onclick="showComingSoon()" class="flex items-center justify-center px-10 py-5 text-lg font-bold rounded-2xl text-dark bg-white border-2 border-gray-200 hover:border-primary/30 shadow-lg hover:shadow-xl transition transform hover:-translate-y-1 cursor-pointer">
+                <a href="https://play.google.com/store/apps/details?id=com.idankarbat.pharmmate" target="_blank" rel="noopener" onclick="trackDownload('google_play', 'cta_section')" class="flex items-center justify-center px-10 py-5 text-lg font-bold rounded-2xl text-dark bg-white border-2 border-gray-200 hover:border-primary/30 shadow-lg hover:shadow-xl transition transform hover:-translate-y-1">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Play_Arrow_logo.svg" class="w-8 h-8 ml-4 rtl:ml-4 ltr:mr-4" alt="Google Play">
                     <div class="text-right rtl:text-right ltr:text-left">
-                        <div class="text-sm text-gray-400" data-key="googleSub">זמין ב-</div>
+                        <div class="text-sm text-gray-400" data-key="googleSub">הורידו מ-</div>
                         <div class="text-xl font-bold">Google Play</div>
                     </div>
-                </button>
+                </a>
             </div>
 
             <!-- Final trust badges -->
@@ -886,52 +886,6 @@
         </div>
     </footer>
 
-    <!-- Coming Soon Modal -->
-    <div id="coming-soon-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/50 backdrop-blur-sm" onclick="if(event.target===this)hideComingSoon()">
-        <div class="bg-white rounded-3xl p-8 max-w-sm mx-4 text-center shadow-2xl transform scale-95 opacity-0 transition-all duration-300" id="coming-soon-card">
-            <div class="w-16 h-16 bg-secondary/10 rounded-2xl flex items-center justify-center mx-auto mb-5">
-                <i class="fa-brands fa-google-play text-secondary text-3xl"></i>
-            </div>
-            <h3 class="text-xl font-black text-dark mb-2" id="coming-soon-title">!בקרוב מאוד</h3>
-            <p class="text-gray-500 text-sm mb-6" id="coming-soon-desc">גרסת האנדרואיד בדרך אליכם. עקבו אחרינו לעדכונים!</p>
-            <button onclick="hideComingSoon()" class="px-8 py-3 bg-dark text-white font-bold rounded-2xl hover:bg-dark-light transition" id="coming-soon-btn">הבנתי</button>
-        </div>
-    </div>
-
-    <script>
-        function showComingSoon() {
-            const modal = document.getElementById('coming-soon-modal');
-            const card = document.getElementById('coming-soon-card');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            // Update text based on language
-            if (currentLang === 'en') {
-                document.getElementById('coming-soon-title').textContent = 'Coming Very Soon!';
-                document.getElementById('coming-soon-desc').textContent = 'The Android version is on its way. Stay tuned!';
-                document.getElementById('coming-soon-btn').textContent = 'Got it';
-            } else {
-                document.getElementById('coming-soon-title').textContent = '!בקרוב מאוד';
-                document.getElementById('coming-soon-desc').textContent = 'גרסת האנדרואיד בדרך אליכם. עקבו אחרינו לעדכונים!';
-                document.getElementById('coming-soon-btn').textContent = 'הבנתי';
-            }
-            requestAnimationFrame(() => {
-                card.classList.remove('scale-95', 'opacity-0');
-                card.classList.add('scale-100', 'opacity-100');
-            });
-        }
-
-        function hideComingSoon() {
-            const modal = document.getElementById('coming-soon-modal');
-            const card = document.getElementById('coming-soon-card');
-            card.classList.remove('scale-100', 'opacity-100');
-            card.classList.add('scale-95', 'opacity-0');
-            setTimeout(() => {
-                modal.classList.remove('flex');
-                modal.classList.add('hidden');
-            }, 300);
-        }
-    </script>
-
     <script>
         // Translations
         const translations = {
@@ -952,7 +906,7 @@
                 statSavingsNum: "עשרות אחוזי",
                 statSavings: "חיסכון",
                 appleSub: "הורידו מ-",
-                googleSub: "זמין ב-",
+                googleSub: "הורידו מ-",
                 trust1: "תוצאות בשניות",
                 trust2: "ללא הרשמה",
                 trust3: "ללא פרסומות",
