@@ -80,11 +80,11 @@
         <!-- Manual buttons (shown on desktop or as fallback) -->
         <div id="manual-buttons" style="display:none;">
             <h1 class="text-2xl font-bold text-gray-800 mb-4">הורידו את Pharmy</h1>
-            <a id="ios-link" class="store-btn btn-ios" href="#">
-                App Store הורדה מ
+            <a id="ios-link" class="store-btn btn-ios" dir="ltr" href="#">
+                Download from App Store
             </a>
-            <a id="android-link" class="store-btn btn-android" href="#">
-                Google Play הורדה מ
+            <a id="android-link" class="store-btn btn-android" dir="ltr" href="#">
+                Download from Google Play
             </a>
         </div>
 
@@ -121,7 +121,7 @@
             var targetUrl = isInAppBrowser() ? IOS_NATIVE : IOS_URL;
             fallbackLink.href = targetUrl;
             iosLink.href = targetUrl;
-            title.textContent = '...App Store מעביר אותך ל';
+            title.textContent = 'מעביר אותך ל-App Store...';
 
             // Auto-redirect after tracking fires
             setTimeout(function() { window.location.href = targetUrl; }, 600);
@@ -131,7 +131,7 @@
             var targetUrl = isInAppBrowser() ? ANDROID_NATIVE : ANDROID_URL;
             fallbackLink.href = targetUrl;
             androidLink.href = targetUrl;
-            title.textContent = '...Google Play מעביר אותך ל';
+            title.textContent = 'מעביר אותך ל-Google Play...';
 
             setTimeout(function() { window.location.href = targetUrl; }, 600);
 
