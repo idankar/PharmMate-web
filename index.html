@@ -1198,5 +1198,23 @@
             });
         });
     </script>
+
+    <!-- In-app browser detection: rewrite store links to native URI schemes -->
+    <script>
+    (function() {
+        var ua = navigator.userAgent || '';
+        if (!/Instagram|FBAN|FBAV|Twitter|Line|Snapchat|TikTok|BytedanceWebview/i.test(ua)) return;
+
+        var isIOS = /iphone|ipad|ipod/i.test(ua);
+        var isAndroid = /android/i.test(ua);
+
+        document.querySelectorAll('a[href*="apps.apple.com"]').forEach(function(a) {
+            if (isIOS) a.href = 'itms-apps://itunes.apple.com/il/app/id6753762155';
+        });
+        document.querySelectorAll('a[href*="play.google.com"]').forEach(function(a) {
+            if (isAndroid) a.href = 'intent://details?id=com.idankarbat.pharmmate#Intent;scheme=market;package=com.android.vending;end';
+        });
+    })();
+    </script>
 </body>
 </html>
