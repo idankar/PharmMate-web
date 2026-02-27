@@ -14,30 +14,23 @@
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'G-1E4ZDXBPEH'); // GA4
-        gtag('config', 'AW-17901784857'); // Google Ads
+        gtag('config', 'G-1E4ZDXBPEH');
+        gtag('config', 'AW-17901784857');
 
         function getUrlParam(param) {
-            const urlParams = new URLSearchParams(window.location.search);
+            var urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(param);
         }
 
-        // Track this as a conversion (GA4)
         gtag('event', 'download_redirect', {
             'source': getUrlParam('utm_source') || 'direct',
             'medium': getUrlParam('utm_medium') || 'none',
             'campaign': getUrlParam('utm_campaign') || 'none'
         });
 
-        // Track Google Ads conversion
         gtag('event', 'conversion', {
             'send_to': 'AW-17901784857/PAGE_VIEW'
         });
-
-        // Redirect to App Store after brief delay (allows tracking to complete)
-        setTimeout(function() {
-            window.location.href = 'https://apps.apple.com/il/app/pharmy/id6753762155';
-        }, 500);
     </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -57,18 +50,107 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        .store-btn {
+            display: block;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 700;
+            text-decoration: none;
+            color: #fff;
+            margin-bottom: 10px;
+            transition: transform 0.1s;
+        }
+        .store-btn:active { transform: scale(0.97); }
+        .btn-ios { background: #000; }
+        .btn-android { background: #1b5e20; }
     </style>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-pink-50 to-green-50 flex items-center justify-center">
-    <div class="text-center p-8">
+    <div class="text-center p-8 max-w-sm">
         <img src="/app-icon.png" alt="Pharmy" class="w-20 h-20 mx-auto mb-6 rounded-2xl shadow-lg">
-        <h1 class="text-2xl font-bold text-gray-800 mb-2">מעביר אותך ל-App Store...</h1>
-        <p class="text-gray-500 mb-6">שנייה אחת</p>
-        <div class="spinner mx-auto mb-6"></div>
-        <a href="https://apps.apple.com/il/app/pharmy/id6753762155"
-           class="text-pink-500 hover:text-pink-600 text-sm underline">
+
+        <!-- Auto-redirect state (shown initially on mobile) -->
+        <div id="auto-redirect">
+            <h1 class="text-2xl font-bold text-gray-800 mb-2" id="redirect-title">מעביר אותך לחנות...</h1>
+            <p class="text-gray-500 mb-6">שנייה אחת</p>
+            <div class="spinner mx-auto mb-6"></div>
+        </div>
+
+        <!-- Manual buttons (shown on desktop or as fallback) -->
+        <div id="manual-buttons" style="display:none;">
+            <h1 class="text-2xl font-bold text-gray-800 mb-4">הורידו את Pharmy</h1>
+            <a id="ios-link" class="store-btn btn-ios" href="#">
+                App Store הורדה מ
+            </a>
+            <a id="android-link" class="store-btn btn-android" href="#">
+                Google Play הורדה מ
+            </a>
+        </div>
+
+        <a id="fallback-link" href="#"
+           class="text-pink-500 hover:text-pink-600 text-sm underline mt-4 inline-block">
             לחצו כאן אם העמוד לא עובר אוטומטית
         </a>
     </div>
+
+    <script>
+        // Store URLs
+        var IOS_URL = 'https://apps.apple.com/il/app/pharmy/id6753762155';
+        var ANDROID_URL = 'https://play.google.com/store/apps/details?id=com.idankarbat.pharmmate';
+
+        // Native URI schemes — these break out of in-app browsers (Instagram, Facebook, etc.)
+        var IOS_NATIVE = 'itms-apps://itunes.apple.com/il/app/id6753762155';
+        var ANDROID_NATIVE = 'intent://details?id=com.idankarbat.pharmmate#Intent;scheme=market;package=com.android.vending;end';
+
+        var ua = navigator.userAgent || '';
+
+        function isIOS() { return /iphone|ipad|ipod/i.test(ua); }
+        function isAndroid() { return /android/i.test(ua); }
+        function isInAppBrowser() { return /Instagram|FBAN|FBAV|Twitter|Line|Snapchat|TikTok|BytedanceWebview/i.test(ua); }
+
+        var autoDiv = document.getElementById('auto-redirect');
+        var manualDiv = document.getElementById('manual-buttons');
+        var fallbackLink = document.getElementById('fallback-link');
+        var iosLink = document.getElementById('ios-link');
+        var androidLink = document.getElementById('android-link');
+        var title = document.getElementById('redirect-title');
+
+        if (isIOS()) {
+            // iOS device
+            var targetUrl = isInAppBrowser() ? IOS_NATIVE : IOS_URL;
+            fallbackLink.href = targetUrl;
+            iosLink.href = targetUrl;
+            title.textContent = '...App Store מעביר אותך ל';
+
+            // Auto-redirect after tracking fires
+            setTimeout(function() { window.location.href = targetUrl; }, 600);
+
+        } else if (isAndroid()) {
+            // Android device
+            var targetUrl = isInAppBrowser() ? ANDROID_NATIVE : ANDROID_URL;
+            fallbackLink.href = targetUrl;
+            androidLink.href = targetUrl;
+            title.textContent = '...Google Play מעביר אותך ל';
+
+            setTimeout(function() { window.location.href = targetUrl; }, 600);
+
+        } else {
+            // Desktop — show both buttons, no auto-redirect
+            autoDiv.style.display = 'none';
+            manualDiv.style.display = 'block';
+            fallbackLink.style.display = 'none';
+            iosLink.href = IOS_URL;
+            androidLink.href = ANDROID_URL;
+        }
+
+        // Fallback: if auto-redirect didn't work after 3 seconds, show manual buttons
+        setTimeout(function() {
+            manualDiv.style.display = 'block';
+            var spinner = document.querySelector('.spinner');
+            if (spinner) spinner.style.display = 'none';
+            title.textContent = 'לחצו להורדה';
+        }, 3000);
+    </script>
 </body>
 </html>
