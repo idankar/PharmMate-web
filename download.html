@@ -34,7 +34,7 @@
     </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&display=swap" rel="stylesheet">
 
     <style>
         body { font-family: 'Heebo', sans-serif; }
@@ -64,14 +64,115 @@
         .store-btn:active { transform: scale(0.97); }
         .btn-ios { background: #000; }
         .btn-android { background: #1b5e20; }
+
+        /* Instagram instruction styles */
+        .insta-instructions {
+            max-width: 360px;
+            margin: 0 auto;
+        }
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: #fff;
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            text-align: right;
+        }
+        .step-number {
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #EFA7B0;
+            color: #fff;
+            font-weight: 800;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .step-text {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #333;
+        }
+        .step-highlight {
+            font-weight: 700;
+            color: #000;
+        }
+        .dots-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #333;
+            color: #fff;
+            border-radius: 6px;
+            width: 26px;
+            height: 26px;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            vertical-align: middle;
+            margin: 0 2px;
+        }
+        @keyframes bounce-arrow {
+            0%, 100% { transform: translateY(0) translateX(-50%); }
+            50% { transform: translateY(-8px) translateX(-50%); }
+        }
+        .top-arrow {
+            position: fixed;
+            top: 8px;
+            left: 16px;
+            font-size: 28px;
+            animation: bounce-arrow 1s ease-in-out infinite;
+            z-index: 100;
+        }
     </style>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-pink-50 to-green-50 flex items-center justify-center">
-    <div class="text-center p-8 max-w-sm">
-        <img src="/app-icon.png" alt="Pharmy" class="w-20 h-20 mx-auto mb-6 rounded-2xl shadow-lg">
+    <div class="text-center p-6 w-full">
 
-        <!-- Auto-redirect state (shown initially on mobile) -->
-        <div id="auto-redirect">
+        <!-- Bouncing arrow pointing to top-right (for Instagram users) -->
+        <div id="top-arrow" class="top-arrow" style="display:none;">
+            &#8599;&#xFE0F;
+        </div>
+
+        <img src="/app-icon.png" alt="Pharmy" class="w-20 h-20 mx-auto mb-5 rounded-2xl shadow-lg">
+
+        <!-- Instagram in-app browser instructions -->
+        <div id="insta-guide" style="display:none;" class="insta-instructions">
+            <h1 class="text-2xl font-bold text-gray-800 mb-2">כדי להוריד את Pharmy</h1>
+            <p class="text-gray-500 mb-5 text-base">יש לפתוח את הדף בדפדפן</p>
+
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-text">
+                    לחצו על <span class="dots-icon">&#8943;</span> בפינה <span class="step-highlight">השמאלית העליונה</span>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-text">
+                    בחרו <span class="step-highlight">&laquo;פתיחה בדפדפן חיצוני&raquo;</span>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-text">
+                    הדף ייפתח בדפדפן ויעביר אתכם <span class="step-highlight">ישירות לחנות</span>
+                </div>
+            </div>
+
+            <p class="text-gray-400 text-sm mt-6">ההורדה תתחיל אוטומטית אחרי פתיחה בדפדפן</p>
+        </div>
+
+        <!-- Auto-redirect state (shown on mobile, outside in-app browser) -->
+        <div id="auto-redirect" style="display:none;">
             <h1 class="text-2xl font-bold text-gray-800 mb-2" id="redirect-title">מעביר אותך לחנות...</h1>
             <p class="text-gray-500 mb-6">שנייה אחת</p>
             <div class="spinner mx-auto mb-6"></div>
@@ -81,27 +182,22 @@
         <div id="manual-buttons" style="display:none;">
             <h1 class="text-2xl font-bold text-gray-800 mb-4">הורידו את Pharmy</h1>
             <a id="ios-link" class="store-btn btn-ios" dir="ltr" href="#">
-                App Store -הורדה מ
+                App Store - הורדה מ
             </a>
             <a id="android-link" class="store-btn btn-android" dir="ltr" href="#">
-                Google Play -הורדה מ
+                Google Play - הורדה מ
             </a>
         </div>
 
-        <a id="fallback-link" href="#"
+        <a id="fallback-link" href="#" style="display:none;"
            class="text-pink-500 hover:text-pink-600 text-sm underline mt-4 inline-block">
             לחצו כאן אם העמוד לא עובר אוטומטית
         </a>
     </div>
 
     <script>
-        // Store URLs
         var IOS_URL = 'https://apps.apple.com/il/app/pharmy/id6753762155';
         var ANDROID_URL = 'https://play.google.com/store/apps/details?id=com.idankarbat.pharmmate';
-
-        // Native URI schemes — these break out of in-app browsers (Instagram, Facebook, etc.)
-        var IOS_NATIVE = 'itms-apps://itunes.apple.com/il/app/id6753762155';
-        var ANDROID_NATIVE = 'intent://details?id=com.idankarbat.pharmmate#Intent;scheme=market;package=com.android.vending;end';
 
         var ua = navigator.userAgent || '';
 
@@ -109,48 +205,58 @@
         function isAndroid() { return /android/i.test(ua); }
         function isInAppBrowser() { return /Instagram|FBAN|FBAV|Twitter|Line|Snapchat|TikTok|BytedanceWebview/i.test(ua); }
 
+        var instaGuide = document.getElementById('insta-guide');
+        var topArrow = document.getElementById('top-arrow');
         var autoDiv = document.getElementById('auto-redirect');
         var manualDiv = document.getElementById('manual-buttons');
         var fallbackLink = document.getElementById('fallback-link');
         var iosLink = document.getElementById('ios-link');
         var androidLink = document.getElementById('android-link');
-        var title = document.getElementById('redirect-title');
 
-        if (isIOS()) {
-            // iOS device
-            var targetUrl = isInAppBrowser() ? IOS_NATIVE : IOS_URL;
-            fallbackLink.href = targetUrl;
-            iosLink.href = targetUrl;
-            title.textContent = 'מעביר אותך ל-App Store...';
+        if (isInAppBrowser()) {
+            // Show instructions to open in external browser
+            instaGuide.style.display = 'block';
+            topArrow.style.display = 'block';
 
-            // Auto-redirect after tracking fires
-            setTimeout(function() { window.location.href = targetUrl; }, 600);
+        } else if (isIOS()) {
+            // Real browser on iOS — auto-redirect to App Store
+            autoDiv.style.display = 'block';
+            fallbackLink.style.display = 'inline-block';
+            fallbackLink.href = IOS_URL;
+            document.getElementById('redirect-title').textContent = 'מעביר אותך ל-App Store...';
+            setTimeout(function() { window.location.href = IOS_URL; }, 600);
+
+            // Fallback buttons after 3 seconds
+            setTimeout(function() {
+                manualDiv.style.display = 'block';
+                iosLink.href = IOS_URL;
+                androidLink.href = ANDROID_URL;
+                document.querySelector('.spinner').style.display = 'none';
+                document.getElementById('redirect-title').textContent = 'לחצו להורדה';
+            }, 3000);
 
         } else if (isAndroid()) {
-            // Android device
-            var targetUrl = isInAppBrowser() ? ANDROID_NATIVE : ANDROID_URL;
-            fallbackLink.href = targetUrl;
-            androidLink.href = targetUrl;
-            title.textContent = 'מעביר אותך ל-Google Play...';
+            // Real browser on Android — auto-redirect to Google Play
+            autoDiv.style.display = 'block';
+            fallbackLink.style.display = 'inline-block';
+            fallbackLink.href = ANDROID_URL;
+            document.getElementById('redirect-title').textContent = 'מעביר אותך ל-Google Play...';
+            setTimeout(function() { window.location.href = ANDROID_URL; }, 600);
 
-            setTimeout(function() { window.location.href = targetUrl; }, 600);
+            setTimeout(function() {
+                manualDiv.style.display = 'block';
+                iosLink.href = IOS_URL;
+                androidLink.href = ANDROID_URL;
+                document.querySelector('.spinner').style.display = 'none';
+                document.getElementById('redirect-title').textContent = 'לחצו להורדה';
+            }, 3000);
 
         } else {
-            // Desktop — show both buttons, no auto-redirect
-            autoDiv.style.display = 'none';
+            // Desktop — show both buttons
             manualDiv.style.display = 'block';
-            fallbackLink.style.display = 'none';
             iosLink.href = IOS_URL;
             androidLink.href = ANDROID_URL;
         }
-
-        // Fallback: if auto-redirect didn't work after 3 seconds, show manual buttons
-        setTimeout(function() {
-            manualDiv.style.display = 'block';
-            var spinner = document.querySelector('.spinner');
-            if (spinner) spinner.style.display = 'none';
-            title.textContent = 'לחצו להורדה';
-        }, 3000);
     </script>
 </body>
 </html>
