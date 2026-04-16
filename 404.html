@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmy - הצטרפו לקהילה</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Pharmy - הצטרפו לקהילה">
+    <meta property="og:description" content="הצטרפו לקהילת Pharmy וקבלו גישה לדילים בלעדיים">
+    <meta property="og:image" content="/og-image.png">
+    <meta property="og:type" content="website">
+
+    <!-- Google Analytics 4 + Google Ads -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1E4ZDXBPEH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1E4ZDXBPEH');
+        gtag('config', 'AW-17901784857');
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Heebo', sans-serif; }
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #EFA7B0;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .cta-btn {
+            display: block;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 700;
+            text-decoration: none;
+            color: #fff;
+            margin-bottom: 10px;
+            transition: transform 0.1s, background 0.2s;
+            background: #EFA7B0;
+        }
+        .cta-btn:hover { background: #e89099; }
+        .cta-btn:active { transform: scale(0.97); }
+        .store-btn {
+            display: block;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            text-decoration: none;
+            color: #fff;
+            margin-bottom: 10px;
+            transition: transform 0.1s;
+        }
+        .store-btn:active { transform: scale(0.97); }
+        .btn-ios { background: #000; }
+        .btn-android { background: #1b5e20; }
+        .invite-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(239, 167, 176, 0.15);
+            color: #c97582;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-pink-50 to-green-50 flex items-center justify-center">
+
+    <!-- Campaign redirect state (/join/{slug}) -->
+    <div id="campaign-state" style="display:none;" class="text-center p-6 w-full max-w-md">
+        <img src="/app-icon.png" alt="Pharmy" class="w-20 h-20 mx-auto mb-5 rounded-2xl shadow-lg">
+
+        <!-- Auto-redirect (attempting to open app) -->
+        <div id="campaign-redirect">
+            <div class="invite-badge">
+                <span>✉️</span>
+                <span>הוזמנתם לקהילה</span>
+            </div>
+            <h1 class="text-2xl font-bold text-gray-800 mb-2">פותחים את Pharmy...</h1>
+            <p class="text-gray-500 mb-6">מעבירים אתכם לאפליקציה</p>
+            <div class="spinner mx-auto mb-4"></div>
+        </div>
+
+        <!-- Fallback (app not installed) -->
+        <div id="campaign-fallback" style="display:none;">
+            <div class="invite-badge">
+                <span>✉️</span>
+                <span>הוזמנתם לקהילה ב-Pharmy</span>
+            </div>
+            <h1 class="text-2xl font-bold text-gray-800 mb-2">הצטרפו עכשיו</h1>
+            <p class="text-gray-500 mb-6">הורידו את האפליקציה וקבלו גישה לדילים הבלעדיים</p>
+
+            <a id="open-app-btn" class="cta-btn" href="#">
+                פתחו את האפליקציה
+            </a>
+
+            <p class="text-gray-400 text-sm mt-4 mb-3">עדיין אין לכם את Pharmy?</p>
+
+            <a id="ios-link" class="store-btn btn-ios" dir="ltr" href="https://apps.apple.com/il/app/pharmy/id6753762155">
+                App Store - הורדה מ
+            </a>
+            <a id="android-link" class="store-btn btn-android" dir="ltr" href="https://play.google.com/store/apps/details?id=com.idankarbat.pharmmate">
+                Google Play - הורדה מ
+            </a>
+        </div>
+    </div>
+
+    <!-- Generic 404 state -->
+    <div id="generic-404" style="display:none;" class="text-center p-6 w-full max-w-md">
+        <img src="/app-icon.png" alt="Pharmy" class="w-20 h-20 mx-auto mb-5 rounded-2xl shadow-lg">
+        <h1 class="text-3xl font-bold text-gray-800 mb-2">404</h1>
+        <p class="text-gray-500 mb-6">הדף לא נמצא</p>
+        <a href="/" class="cta-btn">חזרה לדף הבית</a>
+    </div>
+
+    <script>
+        (function() {
+            var path = window.location.pathname || '';
+            var search = window.location.search || '';
+
+            // Check if this is a /join/{slug} path
+            var joinMatch = path.match(/^\/join\/([^/?]+)/);
+
+            if (!joinMatch) {
+                // Generic 404
+                document.getElementById('generic-404').style.display = 'block';
+                return;
+            }
+
+            var slug = joinMatch[1];
+            var params = new URLSearchParams(search);
+            var campaign = params.get('campaign') || '';
+            var source = params.get('source') || '';
+
+            // Show campaign redirect UI
+            document.getElementById('campaign-state').style.display = 'block';
+
+            // Fire GA event
+            try {
+                gtag('event', 'campaign_link_fallback', {
+                    'slug': slug,
+                    'campaign': campaign || 'none',
+                    'source': source || 'none'
+                });
+            } catch (e) {}
+
+            // Build custom-scheme deep link URL
+            var qParts = [];
+            if (campaign) qParts.push('campaign=' + encodeURIComponent(campaign));
+            if (source) qParts.push('source=' + encodeURIComponent(source));
+            var queryStr = qParts.length ? '?' + qParts.join('&') : '';
+            var customSchemeUrl = 'pharmy://join/' + slug + queryStr;
+
+            var ua = navigator.userAgent || '';
+            function isIOS() { return /iphone|ipad|ipod/i.test(ua); }
+            function isAndroid() { return /android/i.test(ua); }
+            function isInAppBrowser() { return /Instagram|FBAN|FBAV|Twitter|Line|Snapchat|TikTok|BytedanceWebview/i.test(ua); }
+
+            var appOpened = false;
+            function markOpened() { appOpened = true; }
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden) markOpened();
+            });
+            window.addEventListener('blur', markOpened);
+            window.addEventListener('pagehide', markOpened);
+
+            // Try to open the app (only on mobile, not in-app browsers)
+            if ((isIOS() || isAndroid()) && !isInAppBrowser()) {
+                // Use iframe trick for custom scheme (less intrusive than window.location)
+                try {
+                    var iframe = document.createElement('iframe');
+                    iframe.style.display = 'none';
+                    iframe.src = customSchemeUrl;
+                    document.body.appendChild(iframe);
+                    setTimeout(function() {
+                        try { document.body.removeChild(iframe); } catch(e) {}
+                    }, 100);
+                } catch (e) {}
+
+                // Also try direct navigation as backup
+                setTimeout(function() {
+                    if (!appOpened) {
+                        window.location.href = customSchemeUrl;
+                    }
+                }, 50);
+            }
+
+            // After 2.5s, if still here, show fallback UI
+            setTimeout(function() {
+                if (appOpened) return;
+                document.getElementById('campaign-redirect').style.display = 'none';
+                document.getElementById('campaign-fallback').style.display = 'block';
+                document.getElementById('open-app-btn').href = customSchemeUrl;
+            }, 2500);
+        })();
+    </script>
+</body>
+</html>
