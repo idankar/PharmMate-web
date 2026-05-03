@@ -183,7 +183,16 @@
                         ? Intl.DateTimeFormat().resolvedOptions().timeZone : null,
                     locale: navigator.language || null
                 };
-                var fpUrl = 'https://pharmmate-api-production.onrender.com/api/campaign/fingerprint';
+                // Backend URL: staging hostname → staging API; everything else → prod.
+                // Lets staging mobile builds e2e-test DDA when this page is served
+                // from a staging-equivalent hostname (e.g. staging.pharmy.app once
+                // it exists). Without this branch every /join click writes to prod
+                // and staging resolves can never find the row.
+                var fpHost = window.location.hostname || '';
+                var fpApiBase = (fpHost === 'staging.pharmy.app' || fpHost.indexOf('staging') === 0)
+                    ? 'https://pharmmate-api-staging.onrender.com'
+                    : 'https://pharmmate-api-production.onrender.com';
+                var fpUrl = fpApiBase + '/api/campaign/fingerprint';
                 var fpJson = JSON.stringify(fpBody);
                 // sendBeacon with text/plain avoids the CORS preflight that iOS Safari
                 // drops mid-navigation. Falls back to fetch+keepalive if sendBeacon
