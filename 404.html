@@ -146,10 +146,13 @@
                 return;
             }
 
-            var slug = joinMatch[1];
+            var slug = decodeURIComponent(joinMatch[1]);
             var params = new URLSearchParams(search);
             var campaign = params.get('campaign') || '';
             var source = params.get('source') || '';
+            var rawClickId = params.get('cid') || params.get('click_id');
+            var clickIdNum = rawClickId ? parseInt(rawClickId, 10) : null;
+            var clickId = (clickIdNum !== null && !isNaN(clickIdNum)) ? clickIdNum : null;
 
             // Show campaign redirect UI
             document.getElementById('campaign-state').style.display = 'block';
@@ -161,6 +164,33 @@
                     'campaign': campaign || 'none',
                     'source': source || 'none'
                 });
+            } catch (e) {}
+
+            // Deferred-attribution fingerprint write — fire-and-forget.
+            // If the user does not have the app installed yet they will be
+            // sent to the App Store, install Pharmy, and on first cold launch
+            // the app calls /api/campaign/resolve which matches this same
+            // fingerprint to recover the slug. keepalive=true ensures the
+            // POST survives the navigation away from this page.
+            try {
+                var fpBody = {
+                    click_id: clickId,
+                    community_slug: slug,
+                    ua: navigator.userAgent || null,
+                    screen: (window.screen && window.screen.width && window.screen.height)
+                        ? (window.screen.width + 'x' + window.screen.height) : null,
+                    timezone: (window.Intl && Intl.DateTimeFormat)
+                        ? Intl.DateTimeFormat().resolvedOptions().timeZone : null,
+                    locale: navigator.language || null
+                };
+                fetch('https://pharmmate-api-production.onrender.com/api/campaign/fingerprint', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(fpBody),
+                    keepalive: true,
+                    mode: 'cors',
+                    credentials: 'omit'
+                }).catch(function () { /* non-fatal */ });
             } catch (e) {}
 
             // Build custom-scheme deep link URL
