@@ -242,10 +242,21 @@
                 // from a staging-equivalent hostname (e.g. staging.pharmy.app once
                 // it exists). Without this branch every /join click writes to prod
                 // and staging resolves can never find the row.
+                // QA override: ?fp-target=staging routes the fingerprint POST to
+                // the staging backend so an end-to-end test using a staging-pointed
+                // mobile build can match against the row this page writes. Without
+                // this, hitting pharmy.app/join/X writes the row to prod and a
+                // staging APK querying staging will never find it.
+                var fpTarget = params.get('fp-target');
                 var fpHost = window.location.hostname || '';
-                var fpApiBase = (fpHost === 'staging.pharmy.app' || fpHost.indexOf('staging') === 0)
-                    ? 'https://pharmmate-api-staging.onrender.com'
-                    : 'https://pharmmate-api-production.onrender.com';
+                var fpApiBase;
+                if (fpTarget === 'staging') {
+                    fpApiBase = 'https://pharmmate-api-staging.onrender.com';
+                } else if (fpHost === 'staging.pharmy.app' || fpHost.indexOf('staging') === 0) {
+                    fpApiBase = 'https://pharmmate-api-staging.onrender.com';
+                } else {
+                    fpApiBase = 'https://pharmmate-api-production.onrender.com';
+                }
                 var fpUrl = fpApiBase + '/api/campaign/fingerprint';
                 var fpJson = JSON.stringify(fpBody);
                 // sendBeacon with text/plain avoids the CORS preflight that iOS Safari
