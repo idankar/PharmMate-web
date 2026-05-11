@@ -166,6 +166,54 @@
                 });
             } catch (e) {}
 
+            // Phase 1 attribution-improvements (2026-05-11) — helpers for the
+            // three new optional fingerprint dimensions. Matches the app-side
+            // logic in PharmMateNative/services/deferredAttribution.ts so the
+            // backend's NULL-tolerant equality match can tighten when both
+            // sides supply non-NULL values.
+            function parseDeviceModel(uaStr) {
+                if (!uaStr) return null;
+                // iPhone / iPad — coarse family detection. The app sends
+                // "iPhone 15 Pro" style from expo-device Device.modelName,
+                // which the web can't replicate from UA. Coarse match still
+                // helps when the web sends "iPhone" and we have a row from a
+                // user who clicked but the resolve POST hasn't shipped the
+                // model field yet (NULL-tolerant filter).
+                var m = uaStr.match(/\biPhone\b/);
+                if (m) return 'iPhone';
+                m = uaStr.match(/\biPad\b/);
+                if (m) return 'iPad';
+                // Android — "Linux; Android 14; Pixel 7 Pro Build/..." → "Pixel 7 Pro"
+                m = uaStr.match(/Android[^;]*;\s*([^;)]+?)\s+Build\//i);
+                if (m) return m[1].trim().substring(0, 64);
+                m = uaStr.match(/Android[^;]*;\s*([^;)]+?)[);]/i);
+                if (m) return m[1].trim().substring(0, 64);
+                return null;
+            }
+            function computeAccessibilityHash(fontScale, isRTL, reduceMotion) {
+                // Deterministic compact hash. Must match
+                // PharmMateNative/services/deferredAttribution.ts
+                // computeAccessibilityHash for the same logical state.
+                // Web can't read system font-scale reliably, so we hardcode
+                // 1.0 to match the app's typical default-scale fingerprint.
+                var raw = fontScale.toFixed(2) + '|' +
+                          (isRTL ? 1 : 0) + '|' +
+                          (reduceMotion ? 1 : 0);
+                var h = 0;
+                for (var i = 0; i < raw.length; i++) {
+                    h = ((h << 5) - h) + raw.charCodeAt(i);
+                    h |= 0;
+                }
+                var hex = Math.abs(h).toString(16);
+                while (hex.length < 32) hex = '0' + hex;
+                return hex.slice(0, 32);
+            }
+            var fpIsRTL = (document.documentElement.dir || '').toLowerCase() === 'rtl' ||
+                          (window.getComputedStyle &&
+                           window.getComputedStyle(document.documentElement).direction === 'rtl');
+            var fpReduceMotion = (window.matchMedia &&
+                                  window.matchMedia('(prefers-reduced-motion: reduce)').matches) || false;
+
             // Deferred-attribution fingerprint write — fire-and-forget.
             // If the user does not have the app installed yet they will be
             // sent to the App Store, install Pharmy, and on first cold launch
@@ -181,7 +229,13 @@
                         ? (window.screen.width + 'x' + window.screen.height) : null,
                     timezone: (window.Intl && Intl.DateTimeFormat)
                         ? Intl.DateTimeFormat().resolvedOptions().timeZone : null,
-                    locale: navigator.language || null
+                    locale: navigator.language || null,
+                    // Phase 1 attribution-improvements (2026-05-11) — new optional dims.
+                    // Backend uses device_model + screen_density as NULL-tolerant
+                    // filters; accessibility_hash is forensic-only (not matched).
+                    device_model: parseDeviceModel(navigator.userAgent || ''),
+                    screen_density: window.devicePixelRatio || 1,
+                    accessibility_hash: computeAccessibilityHash(1.0, fpIsRTL, fpReduceMotion)
                 };
                 // Backend URL: staging hostname → staging API; everything else → prod.
                 // Lets staging mobile builds e2e-test DDA when this page is served
@@ -224,6 +278,27 @@
             if (source) qParts.push('source=' + encodeURIComponent(source));
             var queryStr = qParts.length ? '?' + qParts.join('&') : '';
             var customSchemeUrl = 'pharmy://join/' + slug + queryStr;
+
+            // Phase 1 attribution Layer 1 (2026-05-11): rewrite the Android
+            // "Google Play" fallback link with ?referrer=campaign=<slug>&click_id=<id>
+            // so the Play Install Referrer API surfaces the attribution to
+            // the app on first cold launch (~99% reliability on Android).
+            // Google Play preserves the referrer string through the install
+            // exactly; the app's InstallReferrerModule.kt parses it back.
+            // Format: encodeURIComponent("campaign=X&click_id=Y") — the inner
+            // ampersand must be encoded so Play stores it as a single ref string.
+            try {
+                var androidEl = document.getElementById('android-link');
+                if (androidEl) {
+                    var inner = 'campaign=' + encodeURIComponent(slug);
+                    if (clickId !== null) {
+                        inner += '&click_id=' + encodeURIComponent(String(clickId));
+                    }
+                    androidEl.href = 'https://play.google.com/store/apps/details' +
+                                     '?id=com.idankarbat.pharmmate' +
+                                     '&referrer=' + encodeURIComponent(inner);
+                }
+            } catch (_e) { /* non-fatal — falls back to the static href */ }
 
             var ua = navigator.userAgent || '';
             function isIOS() { return /iphone|ipad|ipod/i.test(ua); }
