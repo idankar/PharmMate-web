@@ -137,6 +137,13 @@
             var path = window.location.pathname || '';
             var search = window.location.search || '';
 
+            // /product/{barcode} — shared product link. Users without the app
+            // land here. Redirect to homepage (download page) so they can install.
+            if (path.match(/^\/product\//)) {
+                window.location.href = '/';
+                return;
+            }
+
             // Check if this is a /join/{slug} path
             var joinMatch = path.match(/^\/join\/([^/?]+)/);
 
