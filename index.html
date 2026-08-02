@@ -285,6 +285,7 @@
                         <a href="#features" class="text-gray-600 hover:text-primary font-semibold transition" data-key="navFeatures">למה Pharmy</a>
                         <a href="#how-it-works" class="text-gray-600 hover:text-primary font-semibold transition" data-key="navHow">איך זה עובד</a>
                         <a href="#retailers" class="text-gray-600 hover:text-primary font-semibold transition" data-key="navRetailers">רשתות</a>
+                        <a href="#for-business" class="text-gray-600 hover:text-primary font-semibold transition" data-key="navBusiness">לעסקים</a>
                     </div>
 
                     <!-- Language Toggle -->
@@ -506,6 +507,57 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- For Business — retailer lead capture -->
+    <section id="for-business" class="py-16 bg-gradient-to-r from-dark to-dark-light relative overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute top-0 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 left-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 reveal">
+            <div class="text-center mb-8">
+                <span class="inline-block px-4 py-1.5 bg-white/10 rounded-full text-white/80 text-xs font-bold tracking-wider uppercase mb-4" data-key="bizLabel">לבעלי חנויות</span>
+                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white" data-key="bizTitle">המוצרים שלכם עדיין לא בפארמי?</h2>
+                <p class="mt-3 text-white/70 text-base sm:text-lg max-w-2xl mx-auto" data-key="bizSubtitle">אלפי לקוחות מחפשים מוצרים בפארמי מדי יום. השאירו פרטים ונחזור אליכם.</p>
+            </div>
+
+            <form id="biz-form" novalidate class="grid gap-3 md:grid-cols-4 md:items-start">
+                <!-- Honeypot: off-screen, unfocusable, hidden from AT. Bots fill it; humans can't. -->
+                <div class="absolute w-px h-px -m-px p-0 overflow-hidden whitespace-nowrap border-0" style="clip:rect(0 0 0 0)" aria-hidden="true">
+                    <label for="biz-website">Website</label>
+                    <input type="text" id="biz-website" name="website" tabindex="-1" autocomplete="off">
+                </div>
+
+                <div>
+                    <input type="text" id="biz-store" name="store_name" autocomplete="organization"
+                           class="w-full px-4 py-3 rounded-xl bg-white/95 text-dark placeholder-gray-400 font-medium focus:outline-none focus:ring-2 focus:ring-primary transition"
+                           data-key-placeholder="bizStorePlaceholder" placeholder="שם החנות">
+                    <p class="hidden mt-1.5 text-xs text-red-300 font-medium" data-err-for="biz-store"></p>
+                </div>
+
+                <div>
+                    <input type="email" id="biz-email" name="email" autocomplete="email"
+                           class="w-full px-4 py-3 rounded-xl bg-white/95 text-dark placeholder-gray-400 font-medium focus:outline-none focus:ring-2 focus:ring-primary transition"
+                           data-key-placeholder="bizEmailPlaceholder" placeholder="אימייל">
+                    <p class="hidden mt-1.5 text-xs text-red-300 font-medium" data-err-for="biz-email"></p>
+                </div>
+
+                <div>
+                    <input type="tel" id="biz-phone" name="phone" autocomplete="tel" dir="ltr"
+                           class="w-full px-4 py-3 rounded-xl bg-white/95 text-dark placeholder-gray-400 font-medium text-right rtl:text-right focus:outline-none focus:ring-2 focus:ring-primary transition"
+                           data-key-placeholder="bizPhonePlaceholder" placeholder="טלפון">
+                    <p class="hidden mt-1.5 text-xs text-red-300 font-medium" data-err-for="biz-phone"></p>
+                </div>
+
+                <button type="submit" id="biz-submit"
+                        class="w-full bg-primary text-dark px-6 py-3 rounded-xl font-black shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition duration-200 disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0"
+                        data-key="bizSubmit">נחזור אליכם</button>
+            </form>
+
+            <p id="biz-status" role="status" aria-live="polite" class="hidden mt-6 text-center text-base font-bold"></p>
         </div>
     </section>
 
@@ -863,6 +915,7 @@
                         <li><a href="#features" class="hover:text-primary transition" data-key="footerFeatures">תכונות</a></li>
                         <li><a href="#how-it-works" class="hover:text-primary transition" data-key="footerHow">איך זה עובד</a></li>
                         <li><a href="#retailers" class="hover:text-primary transition" data-key="footerRetailers">רשתות</a></li>
+                        <li><a href="#for-business" class="hover:text-primary transition" data-key="navBusiness">לעסקים</a></li>
                     </ul>
                 </div>
 
@@ -999,7 +1052,23 @@
                 terms: "תנאי שימוש",
                 contact: "צור קשר",
                 footerRights: "כל הזכויות שמורות.",
-                footerMade: "נבנה באהבה בישראל"
+                footerMade: "נבנה באהבה בישראל",
+                // For Business
+                navBusiness: "לעסקים",
+                bizLabel: "לבעלי חנויות",
+                bizTitle: "המוצרים שלכם עדיין לא בפארמי?",
+                bizSubtitle: "אלפי לקוחות מחפשים מוצרים בפארמי מדי יום. השאירו פרטים ונחזור אליכם.",
+                bizStorePlaceholder: "שם החנות",
+                bizEmailPlaceholder: "אימייל",
+                bizPhonePlaceholder: "טלפון",
+                bizSubmit: "נחזור אליכם",
+                bizSending: "שולח...",
+                bizSuccess: "תודה! קיבלנו את הפרטים ונחזור אליכם בקרוב.",
+                bizErrStore: "נא להזין שם חנות",
+                bizErrEmail: "נא להזין כתובת אימייל תקינה",
+                bizErrPhone: "נא להזין מספר טלפון ישראלי תקין",
+                bizErrRate: "נשלחו יותר מדי בקשות. נסו שוב מאוחר יותר.",
+                bizErrGeneric: "משהו השתבש. אפשר לכתוב לנו ל-<a href=\"mailto:pharmmate.app@gmail.com\" class=\"underline\">pharmmate.app@gmail.com</a>"
             },
             en: {
                 // Nav
@@ -1111,7 +1180,23 @@
                 terms: "Terms of Service",
                 contact: "Contact",
                 footerRights: "All rights reserved.",
-                footerMade: "Made with love in Israel"
+                footerMade: "Made with love in Israel",
+                // For Business
+                navBusiness: "For Business",
+                bizLabel: "For Store Owners",
+                bizTitle: "Your products aren't on Pharmy yet?",
+                bizSubtitle: "Thousands of shoppers search Pharmy every day. Leave your details and we'll call you back.",
+                bizStorePlaceholder: "Store name",
+                bizEmailPlaceholder: "Email",
+                bizPhonePlaceholder: "Phone",
+                bizSubmit: "Call me back",
+                bizSending: "Sending...",
+                bizSuccess: "Thanks! We've got your details and will be in touch soon.",
+                bizErrStore: "Please enter a store name",
+                bizErrEmail: "Please enter a valid email address",
+                bizErrPhone: "Please enter a valid Israeli phone number",
+                bizErrRate: "Too many submissions. Please try again later.",
+                bizErrGeneric: "Something went wrong. Email us at <a href=\"mailto:pharmmate.app@gmail.com\" class=\"underline\">pharmmate.app@gmail.com</a>"
             }
         };
 
@@ -1141,6 +1226,14 @@
                 const key = el.getAttribute('data-key');
                 if (translations[currentLang][key]) {
                     el.innerHTML = translations[currentLang][key];
+                }
+            });
+
+            // innerHTML can't set a placeholder, so placeholders get their own pass.
+            document.querySelectorAll('[data-key-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-key-placeholder');
+                if (translations[currentLang][key]) {
+                    el.placeholder = translations[currentLang][key];
                 }
             });
         }
@@ -1197,6 +1290,141 @@
                 }
             });
         });
+
+        // ---- For Business: retailer lead form -------------------------------
+        (function () {
+            const form = document.getElementById('biz-form');
+            if (!form) return;
+
+            const submitBtn = document.getElementById('biz-submit');
+            const statusEl = document.getElementById('biz-status');
+            const fields = {
+                store_name: document.getElementById('biz-store'),
+                email: document.getElementById('biz-email'),
+                phone: document.getElementById('biz-phone'),
+            };
+
+            // Mirrors the server rules in backend.py (_LEAD_EMAIL_RE / _IL_PHONE_RE).
+            // Client-side is UX only — the server re-validates everything.
+            const EMAIL_RE = /^[^@\s]+@[^@\s.]+(\.[^@\s.]+)+$/;
+            const PHONE_RE = /^(?:0(?:[57][0-9]{8}|[2-489][0-9]{7})|1[78]00[0-9]{6}|\*[0-9]{4,5})$/;
+
+            function t(key) {
+                return (translations[currentLang] && translations[currentLang][key]) || '';
+            }
+
+            function apiBase() {
+                return location.hostname === 'staging.pharmy.app'
+                    ? 'https://pharmmate-api-staging.onrender.com'
+                    : 'https://pharmmate-api-production.onrender.com';
+            }
+
+            function normalizePhone(value) {
+                let d = (value || '').trim().replace(/[\s\-().]/g, '');
+                if (d.indexOf('+972') === 0) d = '0' + d.slice(4);
+                else if (d.indexOf('972') === 0) d = '0' + d.slice(3);
+                return d;
+            }
+
+            function showError(input, messageKey) {
+                const el = document.querySelector('[data-err-for="' + input.id + '"]');
+                if (!el) return;
+                el.textContent = t(messageKey);
+                el.classList.remove('hidden');
+                input.classList.add('ring-2', 'ring-red-400');
+            }
+
+            function clearErrors() {
+                form.querySelectorAll('[data-err-for]').forEach(el => {
+                    el.textContent = '';
+                    el.classList.add('hidden');
+                });
+                Object.values(fields).forEach(i => i.classList.remove('ring-2', 'ring-red-400'));
+                statusEl.classList.add('hidden');
+            }
+
+            function setStatus(messageKey, ok) {
+                statusEl.innerHTML = t(messageKey);
+                statusEl.className = 'mt-6 text-center text-base font-bold ' +
+                    (ok ? 'text-secondary' : 'text-red-300');
+            }
+
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault();
+                clearErrors();
+
+                const storeName = fields.store_name.value.trim();
+                const email = fields.email.value.trim();
+                const phone = normalizePhone(fields.phone.value);
+
+                let firstBad = null;
+                if (storeName.length < 2 || storeName.length > 100) {
+                    showError(fields.store_name, 'bizErrStore');
+                    firstBad = firstBad || fields.store_name;
+                }
+                if (!EMAIL_RE.test(email) || email.length > 254) {
+                    showError(fields.email, 'bizErrEmail');
+                    firstBad = firstBad || fields.email;
+                }
+                if (!PHONE_RE.test(phone)) {
+                    showError(fields.phone, 'bizErrPhone');
+                    firstBad = firstBad || fields.phone;
+                }
+                if (firstBad) { firstBad.focus(); return; }
+
+                submitBtn.disabled = true;
+                submitBtn.textContent = t('bizSending');
+
+                try {
+                    const res = await fetch(apiBase() + '/api/retailer-lead', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            store_name: storeName,
+                            email: email,
+                            phone: phone,
+                            locale: currentLang,
+                            website: document.getElementById('biz-website').value
+                        })
+                    });
+
+                    if (res.status === 429) {
+                        setStatus('bizErrRate', false);
+                        statusEl.classList.remove('hidden');
+                        return;
+                    }
+
+                    const data = await res.json().catch(() => ({}));
+                    if (res.ok && data.success) {
+                        form.classList.add('hidden');
+                        setStatus('bizSuccess', true);
+                        statusEl.classList.remove('hidden');
+                        return;
+                    }
+                    if (res.status === 400) {
+                        const fieldForDetail = {
+                            invalid_store_name: ['store_name', 'bizErrStore'],
+                            invalid_email: ['email', 'bizErrEmail'],
+                            invalid_phone: ['phone', 'bizErrPhone'],
+                        }[data.detail];
+                        if (fieldForDetail) {
+                            const [fieldKey, messageKey] = fieldForDetail;
+                            showError(fields[fieldKey], messageKey);
+                            fields[fieldKey].focus();
+                            return;
+                        }
+                    }
+                    setStatus('bizErrGeneric', false);
+                    statusEl.classList.remove('hidden');
+                } catch (err) {
+                    setStatus('bizErrGeneric', false);
+                    statusEl.classList.remove('hidden');
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = t('bizSubmit');
+                }
+            });
+        })();
     </script>
 
     <!-- In-app browser detection: rewrite store links to native URI schemes -->
